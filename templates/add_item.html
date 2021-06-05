@@ -1,0 +1,27 @@
+{% extends "admin_layout.html" %}
+
+{% block title %} Add Item {% endblock %}
+
+{% block body %}
+  {% with messages = get_flashed_messages(with_categories=True) %}
+    {% if messages %}
+      {% for status, msg in messages %}
+        <div class="{{ status }} notification">
+          <div class="container">
+            <p>{{msg}}</p>
+          </div>
+        </div>
+      {% endfor %}
+    {% endif %}
+  {% endwith %}
+  <div class="center-window">
+    <h1 class="text-center">Add menu item</h1>
+    <form action="{{ url_for('add_item') }}" method='post'>
+      <label for="Food Name">Food Name:</label>
+      <input type="text" name="food_name" placeholder="Enter food Name">
+      <label for="Cost">Cost:</label>
+      <input type="text" name="cost" placeholder="Enter cost (rupees)">
+      <input type="submit" value="submit" class="btn">
+    </form>
+  </div>
+{% endblock %}

@@ -1,0 +1,31 @@
+{% extends "admin_layout.html" %}
+
+{% block title %} All customers {% endblock %}
+
+{% block body %}
+  <div class="container">
+    {% if cnt != 0 %}
+      <h1>{{ cnt }} Customers</h1>
+      <table>
+        <tr>
+          <th>S.no</th>
+          <th>Customer name</th>
+          <th>Phone</th>
+          <th>No of purchases</th>
+          <th>Category</th>
+        </tr>
+        {% for customer in customers %}
+          <tr>
+            <td>{{ customer.id }}</td>
+            <td>{{ customer.cust_name }}</td>
+            <td>{{ customer.phone }}</td>
+            <td>{{ customer.p_cnt }}</td>
+            <td>{{ customer.category }}</td>
+          </tr>
+        {% endfor %}
+      {% else %}
+        <h1>No customers until now.</h1>
+      </table>
+    {% endif %}
+  </div>
+{% endblock %}

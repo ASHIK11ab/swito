@@ -1,0 +1,36 @@
+{% extends "login_layout.html" %}
+
+{% block title %} Login {% endblock %}
+
+{% block msg %} 
+  {% with messages = get_flashed_messages(with_categories=True) %}
+    {% if messages %}
+      {% for status, msg in messages %}
+        <div class="{{ status }} notification">
+          <div class="container">
+            <p>{{msg}}</p>
+          </div>
+        </div>
+      {% endfor %}
+    {% endif %}
+  {% endwith %}
+{% endblock %}
+
+{% block body %}
+  <div class="center-window">
+    <h1 class="text-center">Login</h1>
+    <form action="{{ url_for('login') }}" method="post">
+      <label for="Username">Username:</label>
+      <input type="text" class="{{ error['is_error'] }}" name="username" placeholder="Enter Username" required>
+      <label for="Password">Password:</label>
+      <input type="password" class="{{ error['is_error'] }}" name="password" placeholder="Enter Password" required>
+      <p class="text-error">
+        {% if 'msg' in error %}
+          {{ error['msg'] }}
+        {% endif %}
+      </p>
+      <button class="btn">Login</button>
+      <br><a class="link" href="{{ url_for('register') }}">Dont have an account. register instead.</a>
+    </form>
+  </div>
+{% endblock %}

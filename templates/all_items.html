@@ -1,0 +1,27 @@
+{% extends "admin_layout.html" %}
+
+{% block title %} All menu items {% endblock %}
+
+{% block body %}
+  <div class="container">
+    {% if items%}
+      <h1>Menu items</h1>
+      <table>
+        <tr>
+          <th>S.no</th>
+          <th>Food name</th>
+          <th>cost</th>
+        </tr>
+        {% for item in items %}
+          <tr>
+            <td>{{ item.id }}</td>
+            <td>{{ item.food_name }}</td>
+            <td>{{ item.cost }}</td>
+          </tr>
+        {% endfor %}
+      {% else %}
+        <h1>No menu items until now.</h1>
+      </table>
+    {% endif %}
+  </div>
+{% endblock %}

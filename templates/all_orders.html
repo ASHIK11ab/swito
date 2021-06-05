@@ -1,0 +1,23 @@
+{% extends "admin_layout.html" %}
+
+{% block title %} All orders {% endblock %}
+
+{% block body %}
+  <div class="container">
+    {% if orders %}
+      <h1>All orders: </h1><hr>
+      <table>
+        <tr>
+          <th>Order id</th>
+        </tr>
+        {% for order in orders %}
+          <tr>
+            <td>{{ order }}</td>
+          </tr>
+        {% endfor %}
+      </table>
+    {% else %}
+      <h1>No orders until now.</h1>
+    {% endif %}
+  </div>
+{% endblock %}

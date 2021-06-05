@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="{{ url_for('static', filename = 'css/styles.css') }}">
+  <title>Order No {{ order.id }}</title>
+</head>
+<body>
+  <div class="container center-window">
+    <div class="card-order">
+      <div class="card-header">
+        <h2>Order no: <span>{{ order.id }}</span></h2>
+      </div>
+      <div class="card-content">
+        <p>Customer name: <span>{{ order.cust_name }}</span></p><hr>
+        <p>Food id: <span>{{ order[2] }}</span></p><hr>
+        <p>Food name: <span>{{ order.food_name }}</span></p><hr>
+        <p>Cost: <span>{{ order.cost }}</span></p>
+      </div>
+    </div>
+  </div>
+</body>
+</html>

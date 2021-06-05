@@ -1,0 +1,18 @@
+{% extends "login_layout.html" %}
+
+{% block title %} Index {% endblock %}
+
+{% block body %} 
+  <div class="center-window">
+    <h1 class="text-center">Swito</h1>
+    <p class="text-center">U will miss your favourite foods again</p><hr>
+    <div class="buttons">
+      <p>
+        <a href="{{ url_for('login') }} " class="btn text-center">Login</a>
+      </p>
+      <p>
+        <a href="{{ url_for('register') }}" class="btn-secondary text-center">Register</a>
+      </p>
+    </div>
+  </div>
+{% endblock %}

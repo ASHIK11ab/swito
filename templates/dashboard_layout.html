@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="{{ url_for('static', filename = 'css/styles.css') }}">
+  <title> {% block title %} {% endblock %}</title>
+</head>
+<body>
+  <div class="nav">
+    <a href="{{ url_for('dashboard') }}" class="clickable-only">Dashboard</a>
+    <div class="dropdown">
+      <button  id="my-account" onclick="display_dropdown()" >My account</button>
+      <div class="close" id="content">  
+        <p>{{ session['user'] }}</p><hr>
+        <p>{{ session['category'] }} user</p><hr>
+        <p class="clickable"><a href="{{ url_for('logout') }}">Logout</a></p>
+      </div>
+    </div>
+  </div>
+  <div class="container">
+    {% block msg %} {% endblock %}
+    <div class="product-search">
+      <form action="{{ url_for('dashboard') }}" method="post">
+          <input type="text" name="query" placeholder="Search">
+          <button href="#">Search</button>
+      </form>
+    </div>
+  </div>
+  {% block body %} {% endblock %}
+  <script src="static/js/main.js"></script>
+</body>
+</html>

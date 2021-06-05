@@ -1,0 +1,31 @@
+{% extends "login_layout.html" %}
+
+{% block title %} Register {% endblock %}
+
+{% block body %}
+  <div class="center-window">
+    <h1 class="text-center">Register</h1>
+    <form action="{{ url_for('register') }}" method="post">
+      <label for="Username">Username:</label>
+      <input type="text" class="{{ error['is_error'] }}" name="username" placeholder="Enter Username" required>
+      <p class="text-error">
+        {% if 'user_msg' in error %}
+          {{ error['user_msg'] }}
+        {% endif %}
+      </p>
+      <label for="Phone">Phone:</label>
+      <input type="number" class="{{ error['is_error'] }}" name="phone" placeholder="Enter phone no" required>
+      <label for="Password">Password:</label>
+      <input type="password" class="{{ error['is_error'] }}" name="password" placeholder="Enter Password" required>
+      <label for="Confirm Password">Confirm Password:</label>
+      <input type="password" class="{{ error['is_error'] }}" name="confirm_password" placeholder="Confirm Password" required>
+      <p class="text-error">
+        {% if 'pass_msg' in error %}
+          {{ error['pass_msg'] }}
+        {% endif %}
+      </p>
+      <button class="btn">Register</button>
+      <a class="link text-center" href="{{ url_for('login') }}">Aldready have an account login instead.</a>
+    </form>
+  </div>
+{% endblock %}

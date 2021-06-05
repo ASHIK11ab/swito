@@ -1,0 +1,13 @@
+{% extends "dashboard_layout.html" %}
+
+{% block title %} Dashboard {% endblock %}
+
+{% block msg %}
+  {% with messages = get_flashed_messages() %}
+    {% if messages %}
+      {% for msg in messages %}
+        <p class="success">{{ msg }}</p>
+      {% endfor %}
+    {% endif %}
+  {% endwith %}
+{% endblock %}

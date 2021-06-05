@@ -1,0 +1,23 @@
+{% extends "dashboard_layout.html" %}
+
+{% block title %} Results {% endblock %}
+
+{% block body %}
+  <div class="container">
+    <h2 class="results-cnt">{{ cnt }} results found</h2>
+  </div> 
+  {% if cnt != 0 %}
+    <div class="container">
+      <div class="search-results">
+        {% for item in results %}
+          <div class="item">
+            <p>Food id: <span>{{ item.id }}</span></p>
+            <p>Food name: <span>{{ item.food_name }}</span></p>
+            <p>Cost: <span>{{ item.cost }}</span></p>
+            <a href="{{ url_for('place_order', order_id=item.id) }}" class="order-button">Order</a>
+          </div>
+        {% endfor %}
+      </div>
+    </div>
+  {% endif %}
+{% endblock %}
