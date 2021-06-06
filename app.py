@@ -13,14 +13,18 @@ def index():
 
 @app.route('/login', methods=['GET', 'POST'])
 def login():
-  error = {}
-  error['is_error'] = ''
   if request.method == 'POST':
     username = request.form.get('username')
     password = request.form.get('password')
-    if User.query.filter(and_(username == username, password == password)).first() is None:
-      error['msg'] = 'Invalid username or password'
-      return render_template("login.html", error=error)
+
+    if User.query.filter(
+        and_(
+          User.username == username,
+          User.password == password
+          )
+        ).first() is None:
+      flash('Invalied username or password', 'danger')
+      return render_template('login.html')
     else:
       session["user"] = username
       if username == 'Admin':
@@ -31,7 +35,7 @@ def login():
       else:
         session["category"] = p.category
       return redirect(url_for('dashboard'))
-  return render_template("login.html", error=error)
+  return render_template("login.html")
 
 @app.route('/register', methods=['GET', 'POST'])
 def register():
