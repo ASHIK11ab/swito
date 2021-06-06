@@ -35,13 +35,15 @@ p {
   padding: 1.3rem 0;
 }
 
-.button-box button {
+.button-box a {
   outline: none;
   border: 0;
   width: 150px;
   border-radius: 8px;
-  padding: .8rem;
-  font-size: 17px;
+  padding: .8rem 0;
+  font-size: 18px;
+  text-align: center;
+  text-decoration: none;
   background-color: #6F1E51;
   color: #fff;
   cursor: pointer;
@@ -64,7 +66,7 @@ p {
     flex-wrap: wrap;
   }
 
-  .button-box button {
+  .button-box a {
     margin-top: 15px;
     width: 70%;
   }
