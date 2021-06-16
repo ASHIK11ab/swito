@@ -1,31 +1,42 @@
-{% extends "login_layout.html" %}
+{% extends "login-register-layout.html" %}
 
-{% block title %} Register {% endblock %}
+{% block title %} Register for Swito {% endblock %}
 
 {% block body %}
-  <div class="center-window">
-    <h1 class="text-center">Register</h1>
-    <form action="{{ url_for('register') }}" method="post">
-      <label for="Username">Username:</label>
-      <input type="text" class="{{ error['is_error'] }}" name="username" placeholder="Enter Username" required>
-      <p class="text-error">
+  <main class="main-container">
+    <section class="info-section">
+        <img src="{{ url_for('static', filename='icons/logo.svg') }}"
+        alt="A logo with a knife and spoon infront of black rectangle">
+        <h1>Create Account</h1>
+        <p>
+          Aldready a member, <a href="{{ url_for('login') }}">login instead.</a>
+        </p>
+    </section>
+
+    <section class="form-section">
+      <form action="{{ url_for('register') }}" method="post">
+        <label for="Username">Username:</label><sup>*</sup>
+        <input type="text" class="{{ error['is_error'] }}" name="username" 
+          placeholder="Enter you username" required>
+
         {% if 'user_msg' in error %}
-          {{ error['user_msg'] }}
+          <p class="text-error"> {{ error['user_msg'] }} </p>
         {% endif %}
-      </p>
-      <label for="Phone">Phone:</label>
-      <input type="number" class="{{ error['is_error'] }}" name="phone" placeholder="Enter phone no" required>
-      <label for="Password">Password:</label>
-      <input type="password" class="{{ error['is_error'] }}" name="password" placeholder="Enter Password" required>
-      <label for="Confirm Password">Confirm Password:</label>
-      <input type="password" class="{{ error['is_error'] }}" name="confirm_password" placeholder="Confirm Password" required>
-      <p class="text-error">
+
+        <label for="Password">Password:</label><sup>*</sup>
+        <input type="password" class="{{ error['is_error'] }}" name="password" 
+          placeholder="Enter your password" required>
+
+        <label for="Confirm Password">Confirm Password:</label><sup>*</sup>
+        <input type="password" class="{{ error['is_error'] }}" name="confirm_password" 
+          placeholder="Retype password" required>
+
         {% if 'pass_msg' in error %}
-          {{ error['pass_msg'] }}
+          <p class="text-error"> {{ error['pass_msg'] }} </p>
         {% endif %}
-      </p>
-      <button class="btn">Register</button>
-      <a class="link text-center" href="{{ url_for('login') }}">Aldready have an account login instead.</a>
-    </form>
-  </div>
+
+        <button>Register</button>
+      </form>
+    </section>
+  </main>
 {% endblock %}

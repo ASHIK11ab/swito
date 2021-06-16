@@ -1,6 +1,6 @@
 {% extends "login-register-layout.html" %}
 
-{% block title %} Login {% endblock %}
+{% block title %} Login | Swito {% endblock %}
 
 {% macro get_flash_messages() %}
   {% with messages = get_flashed_messages(with_categories=true) %}
@@ -11,22 +11,30 @@
 {% endmacro %}
 
 {% block body %}
-  <h1>Login</h1>
-  <section class="form-section">
-    <form action="{{ url_for('login') }}" method="POST">
-      <label for="Username">Username:</label>
-      <input type="text" name="username" 
-        placeholder="Enter Username" required>
-      <label for="Password">Password:</label>
-      <input type="password" name="password" 
-        placeholder="Enter Password" required>
-      
-      {{ get_flash_messages() }}
-      
-      <button>Login</button>
-      <a href="{{ url_for('register') }}">
-        Dont have an account. register instead.
-      </a>
-    </form>
-  </section>
+  <main class="main-container">
+    <section class="info-section">
+        <img src="{{ url_for('static', filename='icons/logo.svg') }}"
+        alt="A logo with a knife and spoon infront of black rectangle">
+        <h1>Login to Swito</h1>
+        <p>
+          New here, <a href="{{ url_for('register') }}">Register instead.</a>
+        </p>
+    </section>
+
+    <section class="form-section">
+      <form action="{{ url_for('login') }}" method="POST">
+        <label for="Username">Username:</label>
+        <input type="text" name="username" placeholder="Your Username" 
+          required>
+
+        <label for="Password">Password:</label>
+        <input type="password" name="password" placeholder="Your Password"
+          required>
+        
+        {{ get_flash_messages() }}
+        
+        <button>Login</button>
+      </form>
+    </section>
+  </main>
 {% endblock %}
