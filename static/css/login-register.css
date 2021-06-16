@@ -1,0 +1,168 @@
+:root {
+  --blue-link-color: #3EA2DC;
+  --brand-color: #6F1E51;
+  --light-bg-color: #fffbfb;
+}
+
+body {
+  margin: 0;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.main-container {
+  width: 100%;
+  margin: 0;
+  display: flex;
+  align-items: center;
+  box-sizing: border-box;
+}
+
+.info-section, .form-section{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-around;
+  padding: 2rem;
+  box-sizing: border-box;
+  transition: background-color .4s;
+}
+
+.info-section {
+  width: 50vw;
+  background-color: var(--light-bg-color);
+}
+
+.info-section img {
+  width: 200px;
+  height: 120px;
+  margin-bottom: -2rem;
+}
+
+.info-section h1, p {
+  font-weight: bold; 
+  text-align: center;
+}
+
+.info-section h1 {
+  font-size: 75px;
+  margin: 0;
+  color: var(--brand-color);
+}
+
+.info-section p {
+  margin: 10px 0 0 0;
+  font-size: 21px;
+  color: #707070;
+}
+
+.info-section p a {
+  color: var(--blue-link-color);
+  text-decoration: none;
+}
+
+.info-section p a:hover {
+  color: #318bbe;
+  text-decoration: underline;
+}
+
+.form-section {
+  width: 50vw;
+  background-color: #F3F2F2;
+  height: 100vh;
+}
+
+form {
+  width: 500px;
+  padding: 2rem; 
+  background-color: #fff;
+  border: 1.8px solid #ddd;
+  border-radius: 12px;
+  box-sizing: border-box;
+}
+
+label {
+  display: inline-block;
+  color: #0c0c0c;
+  font-size: 20px;
+}
+
+form sup {
+  color: #ff0000;
+  font-weight: bold;
+  font-size: 20px;
+}
+
+form input {
+  position: relative;
+  width: 100%;
+  margin: 15px 0;
+  font-size: 17px;
+  padding: .8rem;
+  border: 2px solid #ddd;
+  border-radius: 8px;
+  caret-color: var(--brand-color);
+  box-sizing: border-box;
+  outline: none;
+}
+
+form input:focus {
+  outline: none;
+  border: 2px solid var(--blue-link-color);
+  transition: border .5s;
+}
+
+form button {
+  margin-top: 10px;
+  padding: .7rem 1.3rem;
+  border: 2px solid var(--brand-color);
+  border-radius: 8px;
+  background-color: var(--brand-color);
+  color: #fff;
+  font-size: 19px;
+  cursor: pointer;
+  transition: background-color .4s;
+}
+
+form button:hover {
+  background-color: #7e3864;
+  color: #fff;
+}
+
+@media (max-width: 1220px) {
+  .main-container {
+    flex-direction: column;
+    width: 100vw;
+  }
+
+  .info-section, .form-section {
+    width: 100vw;
+    height: auto;
+  }
+
+  .form-section {
+    background-color: var(--light-bg-color);
+    padding-top: 0rem;
+  }
+}
+
+@media (max-width: 700px) {
+  .info-section h1 {
+    font-size: 60px;
+  }
+
+  form {
+    width: 100%;
+    padding: 1.5rem;
+  }
+}
+
+@media (max-width: 500px) {
+  .info-section h1 {
+    font-size: 40px;
+    line-height: 3rem;
+  }
+
+  .info-section p {
+    font-size: 19px;
+  }
+}
