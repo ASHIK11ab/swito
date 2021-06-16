@@ -6,16 +6,10 @@
   <link rel="shortcut icon"
     href="{{ url_for('static', filename='images/favicon.png') }}">
   <link rel="stylesheet"
-    href="{{ url_for('static', filename='css/login-register-layout.css') }}">
+    href="{{ url_for('static', filename='css/login-register.css') }}">
   <title> {% block title %} {% endblock %}</title>
 </head>
 <body>
-  <main class="main-container">
-    <div class="logo-container">
-      <img src="{{ url_for('static', filename='images/logo.svg') }}"
-          alt="Logo image for swito online food ordering application">
-    </div>
-    {% block body %} {% endblock %}
-  </main>
+  {% block body %} {% endblock %}
 </body>
 </html>
