@@ -22,6 +22,8 @@
     </section>
 
     <section class="form-section">
+      <img src="{{ url_for('static', filename='images/foods-beverages-bg.jpg') }}"
+        alt="Background image with foods and beverages">
       <form action="{{ url_for('login') }}" method="POST">
         <label for="Username">Username:</label>
         <input type="text" name="username" placeholder="Your Username" 

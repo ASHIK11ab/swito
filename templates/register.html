@@ -14,6 +14,8 @@
     </section>
 
     <section class="form-section">
+      <img src="{{ url_for('static', filename='images/foods-beverages-bg.jpg') }}"
+        alt="Background image with foods and beverages">
       <form action="{{ url_for('register') }}" method="post">
         <label for="Username">Username:</label><sup>*</sup>
         <input type="text" class="{{ error['is_error'] }}" name="username" 
