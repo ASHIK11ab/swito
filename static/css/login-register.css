@@ -67,8 +67,14 @@ body {
 
 .form-section {
   width: 50vw;
-  background-color: #F3F2F2;
   height: 100vh;
+}
+
+.form-section img {
+  position: absolute;
+  width: 50vw;
+  height: 100%;
+  filter: brightness(.6);
 }
 
 form {
@@ -78,6 +84,7 @@ form {
   border: 1.8px solid #ddd;
   border-radius: 12px;
   box-sizing: border-box;
+  z-index: 1;
 }
 
 label {
@@ -131,17 +138,22 @@ form button:hover {
 @media (max-width: 1220px) {
   .main-container {
     flex-direction: column;
-    width: 100vw;
+    width: 100%;
   }
 
   .info-section, .form-section {
-    width: 100vw;
+    position: relative;
+    width: 100%;
     height: auto;
   }
 
   .form-section {
     background-color: var(--light-bg-color);
     padding-top: 0rem;
+  }
+
+  .form-section img {
+    display: none;
   }
 }
 
