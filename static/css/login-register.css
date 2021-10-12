@@ -1,7 +1,29 @@
+/* This stylesheet contains styles related to 
+  the login and register page of the application. */
+/* ------------------------
+      Table of Contents
+   ------------------------
+     1. General styles
+     2. Information section
+     3. Form section
+     4. Animations
+     5. Media Queries
+*/
+
+
+/* ------------------------
+      1. General styles
+   ------------------------ */
 :root {
   --blue-link-color: #3EA2DC;
   --brand-color: #6F1E51;
   --light-bg-color: #fffbfb;
+}
+
+/* Giving `html` and `body` 100% height since the `main-container`
+  is going to have a 100% height of the window. */
+html, body {
+  height: 100%;
 }
 
 body {
@@ -9,30 +31,41 @@ body {
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
 
+/* Displaying the `info-section` and `form-section` using row layout. */
 .main-container {
-  width: 100%;
-  margin: 0;
+  width: 90%;
+  height: 100%;
+  margin: 0 auto;
   display: flex;
+  justify-content: space-between;
   align-items: center;
   box-sizing: border-box;
 }
 
+/* Background cover image displayed with half the viewport width. */
+.main-bg-cover {
+  position: fixed;
+  width: 50vw;
+  height: 100%;
+  top: 0;
+  left: 50vw;
+  filter: brightness(.6);
+  z-index: -1;
+}
+
+/* ---------------------------
+      2. Information section
+   --------------------------- */
+   
+/* Displaying the elements using column layout. */
 .info-section, .form-section{
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: space-around;
   padding: 2rem;
-  box-sizing: border-box;
-  transition: background-color .4s;
 }
 
-.info-section {
-  width: 50vw;
-  background-color: var(--light-bg-color);
-}
-
-.info-section img {
+.info-section .logo {
   width: 200px;
   height: 120px;
   margin-bottom: -2rem;
@@ -48,7 +81,7 @@ body {
   font-size: 75px;
   margin: 0;
   color: var(--brand-color);
-  animation: slide-left 1.5s 1 forwards;
+  animation: slide-left 1s 1 forwards;
   opacity: 0;
 }
 
@@ -58,7 +91,7 @@ body {
   margin: 10px 0 0 0;
   font-size: 21px;
   color: #707070;
-  animation: opacity 1s 1.5s 1 forwards;
+  animation: opacity 1s .5s 1 forwards;
 }
 
 .info-section p a {
@@ -71,17 +104,9 @@ body {
   text-decoration: underline;
 }
 
-.form-section {
-  width: 50vw;
-  height: 100vh;
-}
-
-.form-section img {
-  position: fixed;
-  width: 50vw;
-  height: 100%;
-  filter: brightness(.6);
-}
+/* -------------
+      3. Form
+   ------------- */
 
 form {
   width: 500px;
@@ -93,16 +118,17 @@ form {
   z-index: 1;
 }
 
-label {
+form label {
   display: inline-block;
   color: #0c0c0c;
-  font-size: 20px;
+  font-size: 19px;
 }
 
+/* Indicator to indicate mandatory fields. */
 form sup {
   color: #ff0000;
   font-weight: bold;
-  font-size: 20px;
+  font-size: 19px;
 }
 
 form input {
@@ -113,6 +139,7 @@ form input {
   padding: .8rem;
   border: 2px solid #ddd;
   border-radius: 8px;
+  /* Changing the caret color to brand color. */
   caret-color: var(--brand-color);
   box-sizing: border-box;
   outline: none;
@@ -141,6 +168,20 @@ form button:hover {
   color: #fff;
 }
 
+/* Class used to style the error message. */
+.text-danger {
+  color: #da1b1b;
+  text-align: left;
+  margin: 5px 0 8px 0;
+  font-weight: 500;
+  font-size: 19px;
+}
+
+/* ------------------
+      4. Animations
+   ------------------ */
+
+/* Animates a element to slide from left. */
 @keyframes slide-left {
   0% {
     left: -35%;
@@ -156,44 +197,46 @@ form button:hover {
   }
 }
 
+/* Animates a element to visible from 0 opacity. */
 @keyframes opacity {
   from {opacity: 0; } to { opacity: 1; }
 }
 
+/* ---------------------
+      5. Media Queries
+   --------------------- */
+
 @media (max-width: 1220px) {
+  /* Displaying the  `info-section` and `form-section` in a column
+    layout on large devices. */
   .main-container {
     flex-direction: column;
-    width: 100%;
   }
 
-  .info-section, .form-section {
-    position: relative;
-    width: 100%;
-    height: auto;
+  /* The background image covers the entire window. */
+  .main-bg-cover {
+    width: 100vw;
+    left: 0;
   }
 
   .info-section {
+    width: 100vw;
     z-index: 1;
     opacity: .9;
     background-color: #fff;
     padding-bottom: 2.3rem;
+    box-sizing: border-box;
   }
 
   .form-section {
     margin-top: 3rem;
-    background-color: var(--light-bg-color);
     padding-top: 0rem;
-  }
-
-  .form-section img {
-    width: 100vw;
-    height: 100vh;
-    top: 0;
-    left: 0;
   }
 }
 
+/* Media queries for medium size devices. */
 @media (max-width: 700px) {
+  /* Resetting the font sizes. */
   .info-section h1 {
     font-size: 60px;
   }
