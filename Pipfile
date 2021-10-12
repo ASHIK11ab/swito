@@ -4,15 +4,9 @@ verify_ssl = true
 name = "pypi"
 
 [packages]
-click = "==7.1.2"
-itsdangerous = "==1.1.0"
-psycopg2 = "==2.8.5"
-Flask = "==1.1.2"
-Flask-SQLAlchemy = "==2.4.4"
-Jinja2 = "==2.11.2"
-MarkupSafe = "==1.1.1"
-SQLAlchemy = "==1.3.18"
-Werkzeug = "==1.0.1"
+flask = "*"
+flask-sqlalchemy = "*"
+psycopg2 = "*"
 
 [dev-packages]
 
