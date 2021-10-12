@@ -1,11 +1,20 @@
-{% extends "login-register-layout.html" %}
-
-{% block title %} Register for Swito {% endblock %}
-
-{% block body %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="shortcut icon"
+    href="{{ url_for('static', filename='images/favicon.png') }}">
+  <link rel="stylesheet"
+    href="{{ url_for('static', filename='css/login-register.css') }}">
+  <title>Login to Swito</title>
+</head>
+<body>
   <main class="main-container">
+    <img src="{{ url_for('static', filename='images/foods-beverages-bg.jpg') }}"
+      alt="Background image with foods and beverages" class="main-bg-cover">
     <section class="info-section">
-        <img src="{{ url_for('static', filename='icons/logo.svg') }}"
+        <img src="{{ url_for('static', filename='icons/logo.svg') }}" class="logo"
         alt="A logo with a knife and spoon infront of black rectangle">
         <h1>Create Account</h1>
         <p>
@@ -14,8 +23,6 @@
     </section>
 
     <section class="form-section">
-      <img src="{{ url_for('static', filename='images/foods-beverages-bg.jpg') }}"
-        alt="Background image with foods and beverages">
       <form action="{{ url_for('register') }}" method="post">
         <label for="Username">Username:</label><sup>*</sup>
         <input type="text" class="{{ error['is_error'] }}" name="username" 
@@ -41,4 +48,5 @@
       </form>
     </section>
   </main>
-{% endblock %}
+</body>
+</html>

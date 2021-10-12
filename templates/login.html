@@ -1,19 +1,20 @@
-{% extends "login-register-layout.html" %}
-
-{% block title %} Login | Swito {% endblock %}
-
-{% macro get_flash_messages() %}
-  {% with messages = get_flashed_messages(with_categories=true) %}
-    {% for category, msg in messages %}
-      <p class="{{ category }} status-message">{{ msg }}</p>
-    {% endfor %}
-  {% endwith %}
-{% endmacro %}
-
-{% block body %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="shortcut icon"
+    href="{{ url_for('static', filename='images/favicon.png') }}">
+  <link rel="stylesheet"
+    href="{{ url_for('static', filename='css/login-register.css') }}">
+  <title>Login to Swito</title>
+</head>
+<body>
   <main class="main-container">
+    <img src="{{ url_for('static', filename='images/foods-beverages-bg.jpg') }}"
+      alt="Background image with foods and beverages" class="main-bg-cover">
     <section class="info-section">
-        <img src="{{ url_for('static', filename='icons/logo.svg') }}"
+        <img src="{{ url_for('static', filename='icons/logo.svg') }}" class="logo"
         alt="A logo with a knife and spoon infront of black rectangle">
         <h1>Login to Swito</h1>
         <p>
@@ -22,8 +23,6 @@
     </section>
 
     <section class="form-section">
-      <img src="{{ url_for('static', filename='images/foods-beverages-bg.jpg') }}"
-        alt="Background image with foods and beverages">
       <form action="{{ url_for('login') }}" method="POST">
         <label for="Username">Username:</label>
         <input type="text" name="username" placeholder="Your Username" 
@@ -33,10 +32,15 @@
         <input type="password" name="password" placeholder="Your Password"
           required>
         
-        {{ get_flash_messages() }}
+        {% with messages = get_flashed_messages(with_categories=true) %}
+          {% for category, msg in messages %}
+            <p class="text-{{ category }}">{{ msg }}</p>
+          {% endfor %}
+        {% endwith %}
         
         <button>Login</button>
       </form>
     </section>
   </main>
-{% endblock %}
+</body>
+</html>
