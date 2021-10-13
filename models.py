@@ -12,11 +12,11 @@ class User(db.Model):
   username = db.Column(db.String(20), nullable=False, unique=True)
   password = db.Column(db.String(20), nullable=False)
 
-  def add_customer(self, phone):
+  def add_customer(self):
     access_lvl = 1
     if(self.username == 'Admin' or self.username == 'admin'):
       access_lvl = 2
-    customer = Customer(cust_name=self.username, phone=phone, access_lvl=access_lvl)
+    customer = Customer(cust_name=self.username, access_lvl=access_lvl)
     db.session.add(customer)
     db.session.commit()
 
