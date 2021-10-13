@@ -25,24 +25,22 @@
     <section class="form-section">
       <form action="{{ url_for('register') }}" method="post">
         <label for="Username">Username:</label><sup>*</sup>
-        <input type="text" class="{{ error['is_error'] }}" name="username" 
+        <input type="text" name="username" 
           placeholder="Enter you username" required>
 
-        {% if 'user_msg' in error %}
-          <p class="text-error"> {{ error['user_msg'] }} </p>
-        {% endif %}
-
         <label for="Password">Password:</label><sup>*</sup>
-        <input type="password" class="{{ error['is_error'] }}" name="password" 
+        <input type="password" name="password" 
           placeholder="Enter your password" required>
 
         <label for="Confirm Password">Confirm Password:</label><sup>*</sup>
-        <input type="password" class="{{ error['is_error'] }}" name="confirm_password" 
+        <input type="password" name="confirm_password" 
           placeholder="Retype password" required>
 
-        {% if 'pass_msg' in error %}
-          <p class="text-error"> {{ error['pass_msg'] }} </p>
-        {% endif %}
+        {% with messages = get_flashed_messages(with_categories=true) %}
+          {% for category, msg in messages %}
+            <p class="text-{{ category }}">{{ msg }}</p>
+          {% endfor %}
+        {% endwith %}
 
         <button>Register</button>
       </form>
