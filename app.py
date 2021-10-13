@@ -1,5 +1,7 @@
 from flask import (Flask, render_template, request, session,
                     url_for, redirect, flash)
+from utils.helperfuncs import ( login_valid, get_category_of_user,
+                              username_exists, add_user )
 from init import app, db
 from models import *
 from mydecorators import *
@@ -11,58 +13,55 @@ from sqlalchemy.orm import aliased
 def index():
   return render_template("index.html")
 
+
 @app.route('/login', methods=['GET', 'POST'])
 def login():
   if request.method == 'POST':
     username = request.form.get('username')
     password = request.form.get('password')
 
-    if User.query.filter(
-        and_(
-          User.username == username,
-          User.password == password
-          )
-        ).first() is None:
-      flash('Invalied username or password', 'danger')
-      return render_template('login.html')
-    else:
-      session["user"] = username
-      if username == 'Admin':
-        return redirect(url_for('admin'))
-      p = Purchase.query.filter(and_(Purchase.cust_id == Customer.id, Customer.cust_name == username)).first()
-      if p is None:
-        session["category"] = 'Bronze'
-      else:
-        session["category"] = p.category
-      return redirect(url_for('dashboard'))
+    # Flash error incase of invalid credentials
+    if not login_valid(username, password):
+      flash('Invalid username or password', 'danger')
+      return redirect(request.url)
+
+    session["user"] = username
+    if username == 'Admin':
+      return redirect('/admin')
+
+    session["category"] = get_category_of_user(username)
+    return redirect('/dashboard')
+
   return render_template("login.html")
+
 
 @app.route('/register', methods=['GET', 'POST'])
 def register():
-  error = {}
-  error["is_error"] = ''
-  if request.method == 'POST':
-    username = request.form.get('username')
-    password = request.form.get('password')
-    confirm_password = request.form.get('confirm_password')
-    phone = request.form.get('phone')
-    if password != confirm_password:
-      error["pass_msg"] = 'Passwords dont match'
-      error["is_error"] = 'error'
-      return render_template("register.html", error=error)
-    if User.query.filter_by(username=username).first():
-      error["user_msg"] = 'Username aldready exists'
-      error["is_error"] = 'error'
-      return render_template("register.html", error=error)
-    user = User(username=username, password=password)
-    db.session.add(user)
-    user.add_customer(phone=phone)
-    session["user"] = username
-    if username == 'admin':
-      return redirect(url_for('admin'))
-    session["category"] = 'bronze'
-    return redirect(url_for('dashboard'))
-  return render_template("register.html", error=error)
+  if request.method == 'GET':
+    return render_template('register.html')
+
+  username = request.form.get('username')
+  password = request.form.get('password')
+  confirm_password = request.form.get('confirm_password')
+
+  if password != confirm_password:
+    flash('Passwords dont match', 'danger')
+    return redirect(request.url)
+
+  # Flash a error if username is aldready taken.
+  if username_exists(username):
+    flash('Username aldready exists', 'danger')
+    return redirect(request.url)
+
+  add_user(username, password)
+
+  session["user"] = username
+  if username == 'admin':
+    return redirect('/admin')
+  session["category"] = get_category_of_user(username)
+
+  return redirect('/dashboard')
+
 
 @app.route('/dashboard', methods=["GET", "POST"])
 @login_required
@@ -89,7 +88,7 @@ def logout():
   session.clear()
   return redirect(url_for('login'))
 
-@app.route('/Admin')
+@app.route('/admin')
 @login_required
 @admin_login_required
 def admin():
