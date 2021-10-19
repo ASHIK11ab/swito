@@ -1,10 +1,17 @@
+"""
+  app.py
+  ~~~~~~~~~~~~~~~~~~~~
+
+  The central application.
+"""
+
 from flask import (Flask, render_template, request, session,
                     url_for, redirect, flash)
 from utils.helperfuncs import ( login_valid, get_category_of_user,
                               username_exists, add_user )
+from utils.decorators import (login_required, admin_login_required)
 from init import app, db
 from models import *
-from mydecorators import *
 from sqlalchemy import and_
 from sqlalchemy.orm import aliased
 

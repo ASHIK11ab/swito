@@ -1,3 +1,11 @@
+"""
+  utils.helperfuncs.py
+  ~~~~~~~~~~~~~~~~~~~~
+
+  Contains the utility functions which are used by 
+  the application.
+"""
+
 from models import *
 from sqlalchemy import and_
 
