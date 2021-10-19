@@ -33,7 +33,7 @@ def login():
       return redirect(request.url)
 
     session["user"] = username
-    if username == 'Admin':
+    if username == 'admin':
       return redirect('/admin')
 
     session["category"] = get_category_of_user(username)
@@ -63,8 +63,6 @@ def register():
   add_user(username, password)
 
   session["user"] = username
-  if username == 'admin':
-    return redirect('/admin')
   session["category"] = get_category_of_user(username)
 
   return redirect('/dashboard')
