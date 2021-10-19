@@ -24,7 +24,7 @@ def admin_login_required(f):
   """ Prevents unauthorised access to admin routes. """
   @wraps(f)
   def wrapper(*args, **kwargs):
-    if session["user"] != "Admin":
+    if session["user"] != "admin":
       flash("Access denied. Admin login required.", "danger")
       return redirect(url_for('login'))
     return f(*args, **kwargs)
