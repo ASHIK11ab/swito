@@ -6,7 +6,7 @@
   the application.
 """
 
-from models import *
+from schema.models import *
 from sqlalchemy import and_
 
 def login_valid(username, password):
@@ -23,26 +23,6 @@ def login_valid(username, password):
       User.password == password
       )
     ).first() is None
-
-
-def get_category_of_user(username):
-  """ Finds a category of the user.
-
-  :param username: username of the user
-  :return: a string representing the category of the user
-  :rtype: str
-  """
-  p = Purchase.query.filter(
-    and_(
-      Purchase.cust_id == Customer.id,
-      Customer.cust_name == username
-    )
-  ).first()
-
-  if p is None:
-    return 'Bronze'
-  else:
-    return p.category
 
 
 def username_exists(username):
@@ -64,5 +44,4 @@ def add_user(username, password):
   """
   user = User(username=username, password=password)
   db.session.add(user)
-  # Adding a user to customer entity.
-  user.add_customer()
+  db.session.commit()
