@@ -5,15 +5,12 @@
   The central application.
 """
 
-from flask import (Flask, render_template, request, session,
+from flask import (render_template, request, session,
                     url_for, redirect, flash)
-from utils.helperfuncs import ( login_valid, get_category_of_user,
-                              username_exists, add_user )
+from utils.helperfuncs import ( login_valid, username_exists, 
+                                add_user )
 from utils.decorators import (login_required, admin_login_required)
 from init import app, db
-from models import *
-from sqlalchemy import and_
-from sqlalchemy.orm import aliased
 
 
 @app.route('/')
@@ -36,7 +33,6 @@ def login():
     if username == 'admin':
       return redirect('/admin')
 
-    session["category"] = get_category_of_user(username)
     return redirect('/dashboard')
 
   return render_template("login.html")
@@ -63,9 +59,15 @@ def register():
   add_user(username, password)
 
   session["user"] = username
-  session["category"] = get_category_of_user(username)
 
   return redirect('/dashboard')
+
+
+@app.route('/logout')
+@login_required
+def logout():
+  session.clear()
+  return redirect(url_for('login'))
 
 
 @app.route('/dashboard', methods=["GET", "POST"])
@@ -77,21 +79,6 @@ def dashboard():
     return render_template('search_results.html', results=results, cnt=len(results))
   return render_template('dashboard.html')
 
-@app.route('/Place-order/<int:order_id>')
-@login_required
-def place_order(order_id):
-  food = Food.query.get(order_id)
-  if food is None:
-    return "<h1>Invalid food id</h1>"
-  food.addOrder(username = session["user"])
-  flash("Order placed")
-  return redirect(url_for("dashboard"))
-
-@app.route('/logout')
-@login_required
-def logout():
-  session.clear()
-  return redirect(url_for('login'))
 
 @app.route('/admin')
 @login_required
@@ -99,53 +86,6 @@ def logout():
 def admin():
   return render_template("admin_dashboard.html")
 
-@app.route('/Admin/All-customers')
-@login_required
-@admin_login_required
-def all_customers():
-  c = aliased(Customer)
-  p = aliased(Purchase)
-  customers = Customer.query.with_entities(c.id, c.cust_name, c.phone, p.p_cnt, p.category).filter(c.id == p.id).all()
-  return render_template("all_customers.html", customers=customers, cnt=len(customers))
-
-@app.route('/Admin/add-item', methods=["GET", "POST"])
-@login_required
-@admin_login_required
-def add_item():
-  if request.method == 'POST':
-    food_name = request.form.get('food_name')
-    food_name = food_name.capitalize()
-    cost = int(request.form.get('cost'))
-    food = Food(food_name=food_name, cost=cost)
-    db.session.add(food)
-    db.session.commit()
-    flash("Food added successfully", "success")
-    return redirect(request.url)
-  else: 
-    return render_template('add_item.html')
-
-@app.route('/Admin/All-orders')
-@login_required
-@admin_login_required
-def all_orders():
-  orders = Order.query.with_entities(Order.id).all()
-  return render_template("all_orders.html", orders=orders)
-
-@app.route('/Admin/order/<int:order_id>')
-@login_required
-@admin_login_required
-def order(order_id):
-  c = aliased(Customer)
-  f = aliased(Food)
-  order = Customer.query.with_entities(c.cust_name, o.id, f.id, f.food_name, f.cost).filter(o.id == order_id).first()
-  return render_template("order.html", order=order)
-
-@app.route('/Admin/All-items')
-@login_required
-@admin_login_required
-def all_items():
-  items = Food.query.all()
-  return render_template("all_items.html", items=items)
 
 if(__name__ == "__main__"):
   with app.app_context():
