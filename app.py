@@ -73,10 +73,6 @@ def logout():
 @app.route('/dashboard', methods=["GET", "POST"])
 @login_required
 def dashboard():
-  if request.method == 'POST':
-    query = request.form.get('query')
-    results = Food.query.filter(Food.food_name.like(f"%{query}%")).all()
-    return render_template('search_results.html', results=results, cnt=len(results))
   return render_template('dashboard.html')
 
 
