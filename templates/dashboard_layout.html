@@ -3,31 +3,32 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="stylesheet" href="{{ url_for('static', filename = 'css/styles.css') }}">
+  <link rel="stylesheet" href="{{ url_for('static', filename = 'css/app-header.css') }}">
   <title> {% block title %} {% endblock %}</title>
 </head>
 <body>
-  <div class="nav">
-    <a href="{{ url_for('dashboard') }}" class="clickable-only">Dashboard</a>
-    <div class="dropdown">
-      <button  id="my-account" onclick="display_dropdown()" >My account</button>
-      <div class="close" id="content">  
-        <p>{{ session['user'] }}</p><hr>
-        <p>{{ session['category'] }} user</p><hr>
-        <p class="clickable"><a href="{{ url_for('logout') }}">Logout</a></p>
+  <header class="app-header">
+    <div class="container">
+      <div class="left-nav">
+        <i class="icon ham-menu-icon"></i>
+        <div class="brand-logo">
+          <img src="{{ url_for('static', filename='icons/logo.svg') }}" 
+            alt="Swito app logo with knife and fork">
+        </div>
+      </div>
+  
+      <form action="{{ url_for('dashboard') }}">
+        <input type="text" name="query" placeholder="Search for your favourite foods">
+      </form>
+  
+      <div class="right-nav">
+        <i class="icon cart-icon"></i>
+        <div class="user">
+          <img src="https://avatars.githubusercontent.com/u/58099865?v=4" 
+            alt="Swito user profile picture">
+        </div>
       </div>
     </div>
-  </div>
-  <div class="container">
-    {% block msg %} {% endblock %}
-    <div class="product-search">
-      <form action="{{ url_for('dashboard') }}" method="post">
-          <input type="text" name="query" placeholder="Search">
-          <button href="#">Search</button>
-      </form>
-    </div>
-  </div>
-  {% block body %} {% endblock %}
-  <script src="static/js/main.js"></script>
+  </header>
 </body>
 </html>
