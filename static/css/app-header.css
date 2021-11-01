@@ -1,0 +1,108 @@
+:root {
+  --brand-color: #6F1E51;
+  --header-box-shadow: rgba(181,181,181,0.75);
+}
+
+body {
+  margin: 0;
+}
+
+.app-header {
+  position: relative;
+  width: 100%;
+  padding: 15px 25px;
+  box-shadow: -2px 0px 5px 0px var(--header-box-shadow);
+  -webkit-box-shadow: -2px 0px 5px 0px var(--header-box-shadow);
+  -moz-box-shadow: -2px 0px 5px 0px var(--header-box-shadow);
+  box-sizing: border-box;
+}
+
+.app-header .container {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin: 0 auto;
+  padding-left: 1rem;
+  padding-right: 1rem;
+}
+
+.left-nav, .right-nav {
+  display: flex;
+  align-items: center;
+}
+
+i.icon {
+  background-repeat: no-repeat !important;
+  background-position: center;
+}
+
+i.icon, .user, .brand-logo {
+  cursor: pointer;
+}
+
+.ham-menu-icon {
+  background: url('/static/icons/ham-menu.svg');
+  width: 30px;
+  height: 35px;
+}
+
+.brand-logo {
+  width: 50px;
+  height: 55px;
+  margin-left: 25px;
+}
+
+.brand-logo img {
+  width: 100%;
+  height: 100%;
+}
+
+.app-header form {
+  width: 500px;
+}
+
+.app-header input {
+  position: relative;
+  width: 100%;
+  border: 2px solid #ccc;
+  padding: 12px 16px;
+  border-radius: 10px;
+  font-size: 16px;
+  color: #3f2e39;
+  outline: none;
+}
+
+.app-header input:focus {
+  border: 2px solid var(--brand-color);
+  transition: border .6s;
+}
+
+.app-header input::placeholder {
+  color: #868484;
+}
+
+.app-header .cart-icon {
+  background: url('/static/icons/cart.svg');
+  width: 40px;
+  height: 40px;
+  margin-top: 10px;
+}
+
+.app-header .user {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-left: 35px;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  border: 1.5px solid var(--brand-color);
+}
+
+.app-header .user img {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  overflow: hidden;
+}
