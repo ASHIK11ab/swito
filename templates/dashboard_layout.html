@@ -4,13 +4,14 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="stylesheet" href="{{ url_for('static', filename = 'css/app-header.css') }}">
+  <link rel="stylesheet" href="{{ url_for('static', filename = 'css/app-sidebar.css') }}">
   <title> {% block title %} {% endblock %}</title>
 </head>
 <body>
   <header class="app-header">
     <div class="container">
       <div class="left-nav">
-        <i class="icon ham-menu-icon"></i>
+        <i class="icon ham-menu-icon" id="sidebar-toggle-btn"></i>
         <div class="brand-logo">
           <img src="{{ url_for('static', filename='icons/logo.svg') }}" 
             alt="Swito app logo with knife and fork">
@@ -30,5 +31,65 @@
       </div>
     </div>
   </header>
+
+  <aside class="sidebar" id="app-sidebar">
+    <div class="sidebar-container">
+      <section class="sidebar-header">
+        <h2>Hello {{ session["user"] }}</h2>
+        <i class="icon close-btn-icon" id="sidebar-close-btn"></i>
+      </section>
+      <section class="sidebar-section top-section">
+        <h2 class="title">Shop by category</h2>
+        <div class="links">
+          <a href="#">Deserts</a>
+          <a href="#">Starters</a>
+          <a href="#">Main Course</a>
+          <a href="#">Beverages</a>
+        </div>
+      </section>
+      <section class="sidebar-section">
+        <div class="links">
+          <a href="#">
+            <i class="icon cart-icon"></i>
+            My Cart
+          </a>
+          <a href="#">
+            <i class="icon order-icon"></i>
+            My Orders
+          </a>
+        </div>
+      </section>
+      <section class="sidebar-section">
+        <div class="links">
+          <a href="#">
+            <i class="icon ticket-icon"></i>
+            Tickets
+          </a>
+          <a href="#">
+            <i class="icon announcement-icon"></i>
+            Announcements
+          </a>
+        </div>
+      </section>
+      <section class="sidebar-section">
+        <div class="links">
+          <a href="#">
+            <i class="icon account-icon"></i>
+            My Account
+          </a>
+          <a href="#">
+            <i class="icon logout-icon"></i>
+            Sign Out
+          </a>
+        </div>
+      </section>
+    </div>
+  </aside>
+
+  {% block body %} {% endblock %}
+
+  <script src="{{ url_for('static', filename='js/dashboard.js') }}"></script>
+
+  {% block script %} {% endblock %}
 </body>
 </html>
