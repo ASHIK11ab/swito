@@ -1,0 +1,151 @@
+:root {
+  --sidebar-link-color: #727272;
+  --sidebar-link-bg-hover-color: #e9e7e7;
+}
+
+.cart-icon {
+  background: url('/static/icons/cart.svg');
+}
+
+.order-icon {
+  background: url('/static/icons/order-box.svg');
+}
+
+.ticket-icon {
+  background: url('/static/icons/ticket.svg');
+}
+
+.announcement-icon {
+  background: url('/static/icons/speaker.svg');
+}
+
+.account-icon {
+  background: url('/static/icons/account.svg');
+}
+
+.logout-icon {
+  background: url('/static/icons/sign-out.svg');
+}
+
+.sidebar {
+  position: fixed;
+  top: 0;
+  left: -400px;
+  width: 300px;
+  height: 100vh;
+  background-color: #fff;
+  font-family:'Segoe UI', Arial, sans-serif;
+  z-index: 2;
+  overflow-y: scroll;
+}
+
+.toggle-sidebar-left {
+  animation: toggle-sidebar-left .5s forwards;
+}
+
+.toggle-sidebar-right {
+  animation: toggle-sidebar-right .5s forwards;
+}
+
+.modal-bg {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100vh;
+  background-color: rgba(0, 0, 0, 0.4);
+  z-index: 1;
+}
+
+.sidebar .sidebar-container {
+  position: relative;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+.sidebar .sidebar-header {
+  position: fixed;
+  width: 300px;
+  height: 60px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background-color: var(--brand-color);
+  color: #fff;
+  padding: 15px 20px;
+  box-sizing: border-box;
+  z-index: 3;
+}
+
+.sidebar-header h2 {
+  font-size: 22px;
+  text-overflow: ellipsis;
+}
+
+.sidebar-header .close-btn-icon {
+  width: 23px;
+  height: 23px;
+  background: url('/static/icons/close-btn.svg');
+}
+
+.sidebar .sidebar-section {
+  position: relative;
+  width: 100%;
+  padding: 20px 0;
+  box-sizing: border-box;
+}
+
+.sidebar > .sidebar-section:not(:first-child) {
+  border-top: 1px solid #aaa;
+}
+
+.sidebar-section .title {
+  margin: 5px 0 5px 0;
+  padding: 0 20px;
+}
+
+.sidebar .top-section {
+  margin-top: 3.5rem;
+}
+
+.sidebar-section .links {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: space-around;
+}
+
+.sidebar-section .links a {
+  position: relative;
+  width: 100%;
+  padding: 10px 20px;
+  text-decoration: none;
+  color: var(--sidebar-link-color);
+  font-size: 18px;
+  font-weight: 500;
+  display: flex;
+  box-sizing: border-box;
+}
+
+.sidebar-section .links a:hover {
+  background-color: var(--sidebar-link-bg-hover-color);
+  color: #292929;
+  transition: background-color .1s;
+}
+
+.sidebar-section .links a i {
+  display: inline-block;
+  width: 22px;
+  height: 22px;
+  margin-right: 15px;
+}
+
+@keyframes toggle-sidebar-left {
+  from {left: -400px} to {left: 0px;}
+}
+
+@keyframes toggle-sidebar-right {
+  from {right: -400px} to {right: 0px;}
+}
