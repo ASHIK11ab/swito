@@ -15,9 +15,6 @@
   - Forgot your bill we have always backed up that for you.
   - Any issues just create a ticket.
 
-
-<br>
-
 - Front-End:
   1. HTML
   1. CSS
