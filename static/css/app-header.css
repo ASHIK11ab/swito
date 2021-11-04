@@ -86,6 +86,8 @@ i.icon, .user, .brand-logo {
   width: 40px;
   height: 40px;
   margin-top: 10px;
+  filter: invert(14%) sepia(86%) saturate(1563%)
+   hue-rotate(294deg) brightness(92%) contrast(94%);
 }
 
 .app-header .user {
