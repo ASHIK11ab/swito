@@ -9,7 +9,7 @@ main {
 
 .logo-container {
   text-align: center;
-  margin-bottom: -3rem;
+  margin: 1rem 0 -.5rem 0;
 }
 
 h1, p {
@@ -23,8 +23,8 @@ p {
 }
 
 .logo-container img {
-  width: 180px;
-  height: 180px;
+  width: 130px;
+  height: 130px;
 }
 
 .button-box {

@@ -66,9 +66,8 @@ body {
 }
 
 .info-section .logo {
-  width: 200px;
+  width: 120px;
   height: 120px;
-  margin-bottom: -2rem;
 }
 
 .info-section h1, p {
@@ -248,6 +247,11 @@ form button:hover {
 }
 
 @media (max-width: 500px) {
+  .info-section .logo {
+    width: 100px;
+    height: 100px;
+  }
+  
   .info-section h1 {
     font-size: 40px;
     line-height: 3rem;
