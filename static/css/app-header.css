@@ -10,7 +10,7 @@ body {
 .app-header {
   position: relative;
   width: 100%;
-  padding: 15px 25px;
+  padding: 12px 0;
   box-shadow: -2px 0px 5px 0px var(--header-box-shadow);
   -webkit-box-shadow: -2px 0px 5px 0px var(--header-box-shadow);
   -moz-box-shadow: -2px 0px 5px 0px var(--header-box-shadow);
@@ -18,6 +18,8 @@ body {
 }
 
 .app-header .container {
+  position: relative;
+  width: 90%;
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -58,7 +60,7 @@ i.icon, .user, .brand-logo {
 }
 
 .app-header form {
-  width: 500px;
+  width: 450px;
 }
 
 .app-header input {
@@ -70,6 +72,7 @@ i.icon, .user, .brand-logo {
   font-size: 16px;
   color: #3f2e39;
   outline: none;
+  box-sizing: border-box;
 }
 
 .app-header input:focus {
@@ -94,7 +97,7 @@ i.icon, .user, .brand-logo {
   display: flex;
   align-items: center;
   justify-content: center;
-  margin-left: 35px;
+  margin-left: 25px;
   width: 40px;
   height: 40px;
   border-radius: 50%;
@@ -107,4 +110,18 @@ i.icon, .user, .brand-logo {
   height: 100%;
   border-radius: 50%;
   overflow: hidden;
+}
+
+@media (max-width: 768px) {
+  .ham-menu-icon, .cart-icon {
+    display: none;
+  }
+
+  .brand-logo, .user {
+    margin-left: 0 !important;
+  }
+
+  form {
+    width: 70% !important;
+  }
 }
