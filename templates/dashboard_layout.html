@@ -5,6 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="stylesheet" href="{{ url_for('static', filename = 'css/app-header.css') }}">
   <link rel="stylesheet" href="{{ url_for('static', filename = 'css/app-sidebar.css') }}">
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/app-mobile-nav.css') }}">
   <title> {% block title %} {% endblock %}</title>
 </head>
 <body>
@@ -31,6 +32,25 @@
       </div>
     </div>
   </header>
+
+  <nav class="mobile-navbar">
+    <a href="#home">
+      <i class="icon home-icon"></i>
+      <span>Home</span>
+    </a>
+    <a href="#products">
+      <i class="icon search-icon"></i>
+      <span>Search</span>
+    </a>
+    <a href="#products">
+      <i class="icon cart-icon"></i>
+      <span>Cart</span>
+    </a>
+    <a href="#contact" id="mobile-sidebar-toggle-btn">
+      <i class="icon ham-menu-icon"></i>
+      <span>Menu</span>
+    </a>
+  </nav>
 
   <aside class="sidebar" id="app-sidebar">
     <div class="sidebar-container">

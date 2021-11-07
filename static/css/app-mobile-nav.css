@@ -1,0 +1,55 @@
+.home-icon {
+  background: url('/static/icons/home.svg');
+}
+
+.search-icon {
+  background: url('/static/icons/search.svg');
+}
+
+.mobile-navbar {
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+  padding: 10px;
+  background-color: #fff;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  font-family: 'Segoe UI', Arial, sans-serif;
+  border-top: 2px solid rgb(214, 212, 212);
+  z-index: 3;
+}
+
+.mobile-navbar  a {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-decoration: none;
+  user-select: none;
+  filter: invert(16%) sepia(61%) saturate(5%)
+    hue-rotate(312deg) brightness(101%) contrast(90%);
+}
+
+.mobile-navbar a i.icon {
+  display: block;
+  width: 22px;
+  height: 22px;
+}
+
+.mobile-navbar .cart-icon {
+  width: 28px !important;
+  height: 28px !important;
+}
+
+.mobile-navbar span {
+  margin-top: 3px;
+  font-size: 15px;
+  font-weight: 500;
+  color: #363636;
+}
+/* End of styles for mobile navbar. */
+
+/* Hide mobile navbar on large devices. */
+@media (min-width: 769px) {
+  .mobile-navbar { display: none; }
+}
