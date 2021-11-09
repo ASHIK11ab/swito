@@ -10,8 +10,9 @@ from flask import (render_template, request, session,
 from utils.helperfuncs import ( login_valid, username_exists, 
                                 add_user )
 from utils.decorators import (login_required, admin_login_required)
-from init import app, db
+from init import create_app
 
+app = create_app()
 
 @app.route('/')
 def index():
@@ -85,4 +86,4 @@ def admin():
 
 if(__name__ == "__main__"):
   with app.app_context():
-    app.run(debug=True)
+    app.run()
