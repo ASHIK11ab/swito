@@ -6,8 +6,8 @@
   the application.
 """
 
+from werkzeug.security import check_password_hash
 from schema.models import *
-from sqlalchemy import and_
 
 def login_valid(username, password):
   """ Validates the credentials of the user.
@@ -17,12 +17,14 @@ def login_valid(username, password):
     :return: a boolean indicating whether login is valid or not
     :rtype: boolean
   """
-  return not User.query.filter(
-    and_(
-      User.username == username,
-      User.password == password
-      )
-    ).first() is None
+
+  user = User.query.filter(User.username == username).first()
+  # Return false if the username is invalid or if the passwords
+  # dont match.
+  if user is None or not check_password_hash(user.password, password):
+    return False
+  else:
+    return True
 
 
 def username_exists(username):
