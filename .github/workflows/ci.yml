@@ -1,0 +1,27 @@
+name: Application testing
+
+on:
+  push:
+    branches:
+      - main
+  workflow_dispatch:
+
+jobs:
+  Test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+
+      - name: Install Python 3
+        uses: actions/setup-python@v1
+        with:
+          python-version: 3.9
+
+      - name: Install dependency manager
+        run: pip install pipenv
+
+      - name: Install dependencies
+        run: pipenv sync
+
+      - name: Run tests
+        run: pytest
