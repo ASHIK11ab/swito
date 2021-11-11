@@ -17,11 +17,11 @@ jobs:
         with:
           python-version: 3.9
 
-      - name: Install dependency manager
-        run: pip install pipenv
-
       - name: Install dependencies
-        run: pipenv sync
+        run: |
+          pip install pipenv==2020.11.15
+          pipenv sync
+          pipenv shell
 
       - name: Run tests
         run: pytest
