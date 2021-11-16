@@ -23,7 +23,6 @@ jobs:
         run: |
           pip install pipenv==2020.11.15
           pipenv sync
-          pipenv shell
 
       - name: Download config file
         run: |
@@ -32,6 +31,9 @@ jobs:
 
   Test:
     runs-on: ubuntu-latest
+    needs: Pre-Test
     steps:
       - name: Run tests
-        run: pipenv run pytest
+        run: |
+          export FLASK_ENV=testing
+          pipenv run pytest
