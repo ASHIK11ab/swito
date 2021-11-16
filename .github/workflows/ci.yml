@@ -34,4 +34,7 @@ jobs:
       - name: Run tests
         run: |
           export FLASK_ENV=testing
+          pwd
+          ls
+          pip install pipenv==2020.11.15
           pipenv run pytest
