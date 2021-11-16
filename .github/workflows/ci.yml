@@ -25,9 +25,7 @@ jobs:
           pipenv sync
 
       - name: Download config file
-        run: |
-          pwd
-          python download_config.py ${{ secrets.CONFIGURATION_FILE_ID}} ${{ secrets.GDRIVE_API_KEY }}
+        run: pipenv run python download_config.py ${{ secrets.CONFIGURATION_FILE_ID }} ${{ secrets.GDRIVE_API_KEY }}
 
   Test:
     runs-on: ubuntu-latest
