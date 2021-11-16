@@ -7,7 +7,7 @@ on:
   workflow_dispatch:
 
 jobs:
-  Test:
+  Test-and-Deploy:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout Repo
@@ -28,3 +28,6 @@ jobs:
 
       - name: Run tests
         run: pipenv run pytest
+
+      - name: Push to Heroku
+        run: git push -f https://heroku:${{ secrets.HEROKU_API_TOKEN }}@git.heroku.com/${{ secrets.HEROKU_APP_NAME }}.git origin/main:master
