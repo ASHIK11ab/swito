@@ -30,7 +30,10 @@ jobs:
         run: pipenv run pytest
 
       - name: Add config file to git
-        run: git commit -am "added config file"
+        run: |
+          git config user.email ${{ secrets.GIT_EMAIL }}
+          git config user.email ${{ secrets.GIT_NAME }}
+          git commit -am "added config file"
 
       - name: Add Heroku remote
         run: heroku git:remote --app ${{ secrets.HEROKU_APP_NAME }}
