@@ -9,6 +9,8 @@ def create_app(config_dict={}):
     app.config.from_object('configuration.Config')
   elif app.config['ENV'] == 'development':
     app.config.from_object('configuration.DevelopmentConfig')
+  elif app.config['ENV'] == 'testing':
+    app.config.from_object('configuration.TestingConfig')
 
   # Setting configurations passed during testing.
   for key, value in config_dict.items():
