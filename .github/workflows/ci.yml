@@ -62,3 +62,4 @@ jobs:
           heroku_api_key: ${{ secrets.HEROKU_API_TOKEN }}
           heroku_app_name: ${{ secrets.HEROKU_APP_NAME }}
           heroku_email: "ashikmeeranmohideen@gmail.com"
+          dontuseforce: false
