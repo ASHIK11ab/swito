@@ -41,6 +41,9 @@ jobs:
         with:
           python-version: 3.9
 
+      - name: Install Dependancy
+        run: pip install requests
+
       - name: Download config file
         run: python download_config.py ${{ secrets.CONFIGURATION_FILE_ID }} ${{ secrets.GDRIVE_API_KEY }}
 
@@ -54,10 +57,11 @@ jobs:
           git add -f configuration.py
           git commit -m "added configuration.py"
 
-      - name: Add Heroku remote
-        run: heroku git:remote --app ${{ secrets.HEROKU_APP_NAME }}
+      # - name: Add Heroku remote
+      #   run: heroku git:remote --app ${{ secrets.HEROKU_APP_NAME }}
 
-      - name: Push to Heroku
-        run: |
-          git remote -v
-          git push -f heroku main
+      - uses: akhileshns/heroku-deploy@v3.12.12 # This is the action
+        with:
+          heroku_api_key: ${{ secrets.HEROKU_API_TOKEN }}
+          heroku_app_name: ${{ secrets.HEROKU_APP_NAME }} #Must be unique in Heroku
+          heroku_email: "ashikmeeranmohideen@gmail.com"
