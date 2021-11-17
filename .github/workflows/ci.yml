@@ -57,11 +57,8 @@ jobs:
           git add -f configuration.py
           git commit -m "added configuration.py"
 
-      # - name: Add Heroku remote
-      #   run: heroku git:remote --app ${{ secrets.HEROKU_APP_NAME }}
-
-      - uses: akhileshns/heroku-deploy@v3.12.12 # This is the action
+      - uses: akhileshns/heroku-deploy@v3.12.12
         with:
           heroku_api_key: ${{ secrets.HEROKU_API_TOKEN }}
-          heroku_app_name: ${{ secrets.HEROKU_APP_NAME }} #Must be unique in Heroku
+          heroku_app_name: ${{ secrets.HEROKU_APP_NAME }}
           heroku_email: "ashikmeeranmohideen@gmail.com"
