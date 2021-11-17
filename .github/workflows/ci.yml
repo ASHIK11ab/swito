@@ -31,8 +31,8 @@ jobs:
 
       - name: Setup Git config
         run: |
-          git config user.name "Github Actions Bot"
-          git config user.email "<>"
+          git config --global user.name "ASHIK11ab"
+          git config --global user.email "ashikmeeranmohideen@gmail.com"
 
       - name: Clone Current repo and move configuration file
         run: |
