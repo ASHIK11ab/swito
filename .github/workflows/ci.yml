@@ -7,7 +7,7 @@ on:
   workflow_dispatch:
 
 jobs:
-  Test-and-Deploy:
+  Test:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout Repo
@@ -29,28 +29,35 @@ jobs:
       - name: Run tests
         run: pipenv run pytest
 
+  Deploy:
+    runs-on: ubuntu-latest
+    needs: Test
+    steps:
+      - name: Checkout Repo
+        uses: actions/checkout@v2
+
+      - name: Install Python 3
+        uses: actions/setup-python@v1
+        with:
+          python-version: 3.9
+
+      - name: Download config file
+        run: python download_config.py ${{ secrets.CONFIGURATION_FILE_ID }} ${{ secrets.GDRIVE_API_KEY }}
+
       - name: Setup Git config
         run: |
           git config --global user.name "ASHIK11ab"
           git config --global user.email "ashikmeeranmohideen@gmail.com"
 
-      - name: Clone Current repo and move configuration file
-        run: |
-          git clone https://github.com/ASHIK11ab/swito.git swito-deploy-repo
-          mv configuration.py swito-deploy-repo/
-
       - name: Commit the configuration file
         run: |
-          cd swito-deploy-repo
           git add -f configuration.py
           git commit -m "added configuration.py"
 
       - name: Add Heroku remote
-        run: |
-          cd swito-deploy-repo
-          heroku git:remote --app ${{ secrets.HEROKU_APP_NAME }}
+        run: heroku git:remote --app ${{ secrets.HEROKU_APP_NAME }}
 
       - name: Push to Heroku
         run: |
-          cd swito-deploy-repo
+          git remote -v
           git push -f heroku main
