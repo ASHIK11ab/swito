@@ -29,14 +29,28 @@ jobs:
       - name: Run tests
         run: pipenv run pytest
 
-      - name: Add config file to git
+      - name: Setup Git config
         run: |
-          git config user.email ${{ secrets.GIT_EMAIL }}
-          git config user.email ${{ secrets.GIT_NAME }}
-          git commit -am "added config file"
+          git config user.name "Github Actions Bot"
+          git config user.email "<>"
+
+      - name: Clone Current repo and move configuration file
+        run: |
+          git clone https://github.com/ASHIK11ab/swito.git swito-deploy-repo
+          mv configuration.py swito-deploy-repo/
+
+      - name: Commit the configuration file
+        run: |
+          cd swito-deploy-repo
+          git add configuration.py
+          git commit -m "added configuration.py"
 
       - name: Add Heroku remote
-        run: heroku git:remote --app ${{ secrets.HEROKU_APP_NAME }}
+        run: |
+          cd swito-deploy-repo
+          heroku git:remote --app ${{ secrets.HEROKU_APP_NAME }}
 
       - name: Push to Heroku
-        run: git push -f heroku main
+        run: |
+          cd swito-deploy-repo
+          git push -f heroku main
