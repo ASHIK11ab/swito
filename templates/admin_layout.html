@@ -3,22 +3,119 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="stylesheet" href="{{ url_for('static', filename = 'css/styles.css') }}">
-  <title>{% block title %} {% endblock %}</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename = 'css/app-header.css') }}">
+  <link rel="stylesheet" href="{{ url_for('static', filename = 'css/app-sidebar.css') }}">
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/app-mobile-nav.css') }}">
+  <title> {% block title %} {% endblock %}</title>
 </head>
-<body> 
-  <div class="nav">
-    <a href="{{ url_for('admin') }}">Dashboard</a>
-    <a href="{{ url_for('add_item') }} " id="add-item">Add item</a>
-    <div class="dropdown">
-      <button  id="my-account" onclick="display_dropdown()" >My account</button>
-      <div class="close" id="content">  
-        <p>{{ session['user'] }}</p><hr>
-        <p><a href="{{ url_for('logout') }}" class="clickable">Logout</a></p>
+<body>
+  <header class="app-header">
+    <div class="container">
+      <div class="left-nav">
+        <i class="icon ham-menu-icon" id="sidebar-toggle-btn"></i>
+        <div class="brand-logo">
+          <img src="{{ url_for('static', filename='icons/logo.svg') }}" 
+            alt="Swito app logo with knife and fork">
+        </div>
+      </div>
+  
+      <div class="right-nav">
+        <div class="user">
+          <img src="https://avatars.githubusercontent.com/u/58099865?v=4" 
+            alt="Swito user profile picture">
+        </div>
       </div>
     </div>
-  </div>
+  </header>
+
+  <nav class="mobile-navbar">
+    <a href="#home">
+      <i class="icon home-icon"></i>
+      <span>Home</span>
+    </a>
+    <a href="#products">
+      <i class="icon search-icon"></i>
+      <span>Search</span>
+    </a>
+    <a href="#products">
+      <i class="icon cart-icon"></i>
+      <span>Cart</span>
+    </a>
+    <a href="#contact" id="mobile-sidebar-toggle-btn">
+      <i class="icon ham-menu-icon"></i>
+      <span>Menu</span>
+    </a>
+  </nav>
+
+  <aside class="sidebar" id="app-sidebar">
+    <div class="sidebar-container">
+      <section class="sidebar-header">
+        <h2>Hello {{ session["user"] }}</h2>
+        <i class="icon close-btn-icon" id="sidebar-close-btn"></i>
+      </section>
+      <section class="sidebar-section top-section">
+        <div class="links">
+          <a href="#">
+            <i class="icon home-icon"></i>
+            Overview
+          </a>
+        </div>
+      </section>
+      <section class="sidebar-section">
+        <div class="links">
+          <a href="#">
+            <i class="icon ticket-icon"></i>
+            Manage Products
+          </a>
+          <a href="#">
+            <i class="icon announcement-icon"></i>
+            Manage Customers
+          </a>
+        </div>
+      </section>
+      <section class="sidebar-section">
+        <div class="links">
+          <a href="#">
+            <i class="icon cart-icon"></i>
+            Sales Statistics
+          </a>
+          <a href="#">
+            <i class="icon order-icon"></i>
+            Order Statistics
+          </a>
+        </div>
+      </section>
+      <section class="sidebar-section">
+        <div class="links">
+          <a href="#">
+            <i class="icon ticket-icon"></i>
+            Manage Tickets
+          </a>
+          <a href="#">
+            <i class="icon announcement-icon"></i>
+            Manage Announcement
+          </a>
+        </div>
+      </section>
+      <section class="sidebar-section">
+        <div class="links">
+          <a href="#">
+            <i class="icon account-icon"></i>
+            My Account
+          </a>
+          <a href="#">
+            <i class="icon logout-icon"></i>
+            Sign Out
+          </a>
+        </div>
+      </section>
+    </div>
+  </aside>
+
   {% block body %} {% endblock %}
-  <script src="{{ url_for('static', filename = 'js/main.js') }}"></script>
+
+  <script src="{{ url_for('static', filename='js/dashboard.js') }}"></script>
+
+  {% block script %} {% endblock %}
 </body>
 </html>
