@@ -35,3 +35,9 @@ function close_sidebar() {
 sidebar_toggle_btn.addEventListener("click", toggle_sidebar);
 mobile_sidebar_toggle_btn.addEventListener("click", toggle_sidebar);
 sidebar_close_btn.addEventListener("click", close_sidebar);
+
+window.addEventListener('click', (event) => {
+  if(event.target == modal_bg && 
+      sidebar.classList.contains('toggle-sidebar'))
+    close_sidebar();
+});
