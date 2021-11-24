@@ -1,0 +1,69 @@
+:root {
+  --blue-link-color: #3EA2DC;
+  --brand-color: #6F1E51;
+  --light-bg-color: #fffbfb;
+}
+
+/* -------------
+      1. Form
+   ------------- */
+
+form {
+  width: 500px;
+  padding: 2rem; 
+  background-color: #fff;
+  border: 1.8px solid #ddd;
+  border-radius: 12px;
+  box-sizing: border-box;
+  z-index: 1;
+}
+
+form label {
+  display: inline-block;
+  color: #0c0c0c;
+  font-size: 19px;
+}
+
+/* Indicator to indicate mandatory fields. */
+form sup {
+  color: #ff0000;
+  font-weight: bold;
+  font-size: 19px;
+}
+
+form input {
+  position: relative;
+  width: 100%;
+  margin: 15px 0;
+  font-size: 17px;
+  padding: .8rem;
+  border: 2px solid #ddd;
+  border-radius: 8px;
+  /* Changing the caret color to brand color. */
+  caret-color: var(--brand-color);
+  box-sizing: border-box;
+  outline: none;
+}
+
+form input:focus {
+  outline: none;
+  border: 2px solid var(--blue-link-color);
+  transition: border .5s;
+}
+
+form button {
+  margin-top: 10px;
+  padding: .7rem 1.3rem;
+  border: 2px solid var(--brand-color);
+  border-radius: 8px;
+  background-color: var(--brand-color);
+  color: #fff;
+  font-size: 19px;
+  cursor: pointer;
+  transition: background-color .4s;
+}
+
+form button:hover {
+  background-color: #7e3864;
+  color: #fff;
+}
