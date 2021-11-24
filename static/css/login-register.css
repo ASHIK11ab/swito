@@ -5,9 +5,8 @@
    ------------------------
      1. General styles
      2. Information section
-     3. Form section
-     4. Animations
-     5. Media Queries
+     3. Animations
+     4. Media Queries
 */
 
 
@@ -103,70 +102,6 @@ body {
   text-decoration: underline;
 }
 
-/* -------------
-      3. Form
-   ------------- */
-
-form {
-  width: 500px;
-  padding: 2rem; 
-  background-color: #fff;
-  border: 1.8px solid #ddd;
-  border-radius: 12px;
-  box-sizing: border-box;
-  z-index: 1;
-}
-
-form label {
-  display: inline-block;
-  color: #0c0c0c;
-  font-size: 19px;
-}
-
-/* Indicator to indicate mandatory fields. */
-form sup {
-  color: #ff0000;
-  font-weight: bold;
-  font-size: 19px;
-}
-
-form input {
-  position: relative;
-  width: 100%;
-  margin: 15px 0;
-  font-size: 17px;
-  padding: .8rem;
-  border: 2px solid #ddd;
-  border-radius: 8px;
-  /* Changing the caret color to brand color. */
-  caret-color: var(--brand-color);
-  box-sizing: border-box;
-  outline: none;
-}
-
-form input:focus {
-  outline: none;
-  border: 2px solid var(--blue-link-color);
-  transition: border .5s;
-}
-
-form button {
-  margin-top: 10px;
-  padding: .7rem 1.3rem;
-  border: 2px solid var(--brand-color);
-  border-radius: 8px;
-  background-color: var(--brand-color);
-  color: #fff;
-  font-size: 19px;
-  cursor: pointer;
-  transition: background-color .4s;
-}
-
-form button:hover {
-  background-color: #7e3864;
-  color: #fff;
-}
-
 /* Class used to style the error message. */
 .text-danger {
   color: #da1b1b;
@@ -177,7 +112,7 @@ form button:hover {
 }
 
 /* ------------------
-      4. Animations
+      3. Animations
    ------------------ */
 
 /* Animates a element to slide from left. */
@@ -202,7 +137,7 @@ form button:hover {
 }
 
 /* ---------------------
-      5. Media Queries
+      4. Media Queries
    --------------------- */
 
 @media (max-width: 1220px) {
@@ -226,18 +161,21 @@ form button:hover {
     padding-bottom: 2.3rem;
     box-sizing: border-box;
   }
-
-  .form-section {
-    margin-top: 3rem;
-    padding-top: 0rem;
-  }
 }
 
 /* Media queries for medium size devices. */
 @media (max-width: 700px) {
+  .main-container {
+    width: 100%;
+  }
+
   /* Resetting the font sizes. */
   .info-section h1 {
     font-size: 60px;
+  }
+
+  .form-section {
+    padding: 2rem 16px;
   }
 
   form {
