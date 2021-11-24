@@ -57,6 +57,10 @@ jobs:
           git add -f configuration.py
           git commit -m "added configuration.py"
 
+      - name: Pull from Heroku
+        run: git pull ${{ secrets.HEROKU_REMOTE }} main --allow-unrelated-histories
+
+      - name: Push to Heorku
       - uses: akhileshns/heroku-deploy@v3.12.12
         with:
           heroku_api_key: ${{ secrets.HEROKU_API_TOKEN }}
