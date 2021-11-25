@@ -54,6 +54,7 @@ jobs:
         run: |
           git config --global user.name "ASHIK11ab"
           git config --global user.email "ashikmeeranmohideen@gmail.com"
+          git config pull.rebase true
 
       - name: Commit configuration file
         run: |
