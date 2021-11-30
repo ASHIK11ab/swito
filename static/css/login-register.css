@@ -145,6 +145,7 @@ body {
     layout on large devices. */
   .main-container {
     flex-direction: column;
+    justify-content: normal;
   }
 
   /* The background image covers the entire window. */
