@@ -77,4 +77,4 @@ class FoodTag(db.Model):
   __tablename__ = "food_tags"
   id = db.Column(db.Integer, primary_key=True)
   food_id = db.Column(db.Integer, db.ForeignKey("foods.id"), nullable=False)
-  tag_id = db.Column(db.Integer, db.ForeignKey("tags.id"), nullable=False)
+  tag_name = db.Column(db.String(15), nullable=False)
