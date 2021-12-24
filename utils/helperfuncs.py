@@ -8,6 +8,8 @@
 
 from werkzeug.security import check_password_hash
 from schema.models import *
+from flask import current_app as app
+import requests
 
 def login_valid(username, password):
   """ Validates the credentials of the user.
@@ -47,3 +49,34 @@ def add_user(username, password):
   user = User(username=username, password=password)
   db.session.add(user)
   db.session.commit()
+
+
+def valid_extension(filename):
+  return filename.lower().rsplit('.')[1] in app.config['FOOD_IMAGE_EXTENSIONS']
+
+
+def food_tag_available(tag_name):
+  """
+    Checks whether a food tag is available or aldready exists 
+    :param tag_name: name of the tag to be checked
+    :return: boolean indicating whether tag is available or not
+    :rtype: boolean
+  """
+  tags = Tags.query.all()
+  for tag in tags:
+    # Return False if tag name aldready exists.
+    if tag.name == tag_name:
+      return False
+  return True
+
+
+def create_food_tag(tag_name):
+  """ Adds a created food tag to database """
+  tag = Tags(name=tag_name)
+  db.session.add(tag)
+  db.session.commit()
+
+
+def get_food_tags():
+  """ Returns all food tags """
+  return Tags.query.all()

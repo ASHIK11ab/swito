@@ -1,0 +1,84 @@
+:root {
+  --food-tag-bg-color: #FFDBF2;
+}
+
+.container {
+  width: 80%;
+  margin: 0 auto;
+  font-family: 'Segoe UI', Arial, sans-serif;
+}
+
+.top-section {
+  margin-top: 2rem;
+  display: flex;
+  justify-content: space-between;
+}
+
+.top-section h1 {
+  margin-top: 0;
+  display: inline;
+  color: #181818;
+}
+
+.top-section button {
+  height: 45px;
+  padding: 0 20px;
+  background-color: var(--brand-color);
+  color: #fff;
+  border: 2px solid var(--brand-color);
+  border-radius: 8px;
+  font-size: 19px;
+  outline: none;
+  cursor: pointer
+}
+
+.form {
+  margin: 0 auto;
+}
+
+.show-from-top {
+  position: absolute;
+  top: -800px;
+}
+
+.form label {
+  display: block;
+  font-weight: 500;
+  color: #403e3e;
+}
+
+.form input:focus {
+  border: 2px solid var(--brand-color);
+}
+
+.food_tags {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: left;
+  margin: -5px 0 15px 0;
+}
+
+.food_tags .tag {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background-color: var(--food-tag-bg-color);
+  color: var(--brand-color);
+  padding: 3px 12px 6px 12px;
+  font-size: 18px;
+  font-weight: 500;
+  border-radius: 20px;
+  margin: 10px 0 0 10px;
+}
+
+.show-from-top.toggle {
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 4;
+  animation: slide-top .6s forwards;
+}
+
+@keyframes slide-top {
+  from {top: -800px} to {top: 3rem;}
+}

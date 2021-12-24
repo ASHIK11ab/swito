@@ -1,0 +1,44 @@
+{% extends "admin_layout.html" %}
+
+{% block title %} Tags | Swito {% endblock %}
+
+{% block stylesheet %}
+  <link rel="stylesheet" 
+    href="{{ url_for('static', filename = 'css/form.css') }}">
+  <link rel="stylesheet" 
+    href="{{ url_for('static', filename='css/admin/food-tags.css') }}">
+{% endblock %}
+
+{% block body %}
+  <main class="container">
+    <div class="top-section">
+      <h1>
+        Tags: <span id="tags-cnt">{{ tags_cnt }}</span>
+      </h1>
+      <button id="add-tag-btn">
+        <i class="icon cart-icon"></i>
+        <span>New Tag</span>
+      </button>
+    </div>
+    <div class="food_tags">
+      {% for tag in tags %}
+        <span class="tag">
+          <span class="tag-text">{{ tag.name }}</span>
+        </span>
+      {% endfor %}
+    </div>
+
+    <form action="#" id="add-tag-form"
+      class="show-from-top" method="POST">
+      <span class="close-btn">&times;</span>
+      <label for="tag-name">Tag Name:</label>
+      <input type="text" name="name" placeholder="Name of the tag" 
+        required id="tag-name">
+      <button>Create Tag</button>
+    </form>
+  </main>
+{% endblock %}
+
+{% block script %}
+  <script src="{{ url_for('static', filename='js/admin/food-tags.js') }}"></script>
+{% endblock %}

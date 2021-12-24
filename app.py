@@ -6,9 +6,11 @@
 """
 
 from flask import (render_template, request, session,
-                    url_for, redirect, flash)
-from utils.helperfuncs import ( login_valid, username_exists, 
-                                add_user )
+                    url_for, redirect, flash, make_response, jsonify)
+# from utils.helperfuncs import ( login_valid, username_exists, upload_file,
+#                                 add_user, valid_extension, add_food_to_db, 
+#                                 create_food_tag, food_tag_available)
+from utils.helperfuncs import *
 from utils.decorators import (login_required, admin_login_required)
 from init import create_app
 
@@ -81,7 +83,40 @@ def dashboard():
 @login_required
 @admin_login_required
 def admin():
-  return render_template("admin_dashboard.html")
+  return render_template('admin_dashboard.html')
+
+
+@app.route('/admin/products')
+@login_required
+@admin_login_required
+def products():
+  return render_template('products.html')
+
+
+@app.route('/admin/products/tags')
+@login_required
+@admin_login_required
+def tags():
+  tags = get_food_tags()
+  return render_template('food-tags.html', tags=tags, tags_cnt=len(tags))
+
+
+@app.route('/admin/products/tags/add', methods=["POST"])
+@login_required
+@admin_login_required
+def add_tag():
+  tag = request.form.get('name')
+  # Add tag to database if not aldready exists.
+  if food_tag_available(tag):
+    create_food_tag(tag)
+    msg = "Tag created successfully"
+    status = "success"
+    status_code = 200
+  else:
+    msg = "Tag name not available"
+    status = "failure"
+    status_code = 404
+  return make_response(jsonify({"msg": msg, "status": status}), status_code)
 
 
 if(__name__ == "__main__"):
