@@ -26,6 +26,9 @@ jobs:
       - name: Download config file
         run: pipenv run python download_config.py ${{ secrets.CONFIGURATION_FILE_ID }} ${{ secrets.GDRIVE_API_KEY }}
 
+      - name: Download google credentails file
+        run: python download_google_creds.py ${{ secrets.GOOGLE_SERVICE_ACC_CREDENTIALS_ID }} ${{ secrets.GDRIVE_API_KEY }}
+
       - name: Run tests
         run: pipenv run pytest
 
@@ -61,8 +64,8 @@ jobs:
 
       - name: Commit configuration file
         run: |
-          git add -f configuration.py
-          git commit -m "added configuration.py"
+          git add -f configuration.py swito_google_creds.json
+          git commit -m "added secret files"
 
       - name: Heroku login credentials
         run: |
