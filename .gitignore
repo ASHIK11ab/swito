@@ -3,3 +3,4 @@ __pycache__
 .pytest_cache
 
 configuration.py
+swito-google-creds.json
