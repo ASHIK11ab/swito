@@ -1,0 +1,55 @@
+{% extends "admin_layout.html" %}
+
+{% block stylesheet %}
+  <link rel="stylesheet" 
+  href="{{ url_for('static', filename = 'css/form.css') }}">
+  <link rel="stylesheet" 
+    href="{{ url_for('static', filename = 'css/admin/product.css') }}">
+{% endblock %}
+
+{% block title %} Manage Products {% endblock %}
+
+{% block body %}
+  <div class="container">
+    <h2>Products: 0</h2>
+    <button id="add-product-toggle-btn" class="btn">Add product</button>
+
+    <form action="{{ url_for('add_product') }}" id="add-product-form"
+      class="form show-from-top" method="POST" enctype="multipart/form-data">
+      <span class="close-btn">&times;</span>
+      <label for="foodName">Food Name:</label>
+      <input type="text" name="foodName" placeholder="Name of the delicious food" 
+        required id="food-name">
+
+      <label for="quantity">Quantity:</label>
+      <input type="number" name="quantity" placeholder="Quantity of the food available" 
+        required id="quantity">
+      
+      <label for="price">Price:</label>
+      <input type="number" name="price" placeholder="Price of food per unit" 
+        required id="price">
+
+      <label for="image">Food Image:</label>
+      <input type="file" name="image" required id="image">
+
+      <label for="tags">Food Tags:</label>
+      <select name="tags" id="tags_select">
+        <option hidden disabled selected value> -- Select an option -- </option>
+        <option value="trending">Trending</option>
+        <option value="deserts">Deserts</option>
+        <option value="starters">Starters</option>
+        <option value="main_course">Main Course</option>
+        <option value="budget">Budget</option>
+      </select>
+
+      <div id="tags-container" class="food_tags">
+      </div>
+
+      <button>Submit</button>
+  </div>
+{% endblock %}
+
+{% block script %}
+  <script src="{{ url_for('static', filename='js/dashbaord.js') }}"></script>
+  <script src="{{ url_for('static', filename='js/admin/product.js') }}"></script>
+{% endblock %}
