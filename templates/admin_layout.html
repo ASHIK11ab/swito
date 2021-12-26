@@ -70,6 +70,10 @@
             <i class="icon ticket-icon"></i>
             Manage Products
           </a>
+          <a href="{{ url_for('tags') }}">
+            <i class="icon ticket-icon"></i>
+            Manage Tags
+          </a>
           <a href="#">
             <i class="icon announcement-icon"></i>
             Manage Customers
@@ -106,7 +110,7 @@
             <i class="icon account-icon"></i>
             My Account
           </a>
-          <a href="#">
+          <a href="{{ url_for('logout') }}">
             <i class="icon logout-icon"></i>
             Sign Out
           </a>
