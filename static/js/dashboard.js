@@ -18,26 +18,22 @@ function remove_modal_bg() {
   modal_bg = undefined;
 }
 
-function toggle_sidebar() {
-  /* Prevents multiple modals bg's being creating when
-    the toggle btn is clicked continuosly */
-  if(!sidebar.classList.contains('toggle-sidebar')) {
-    create_modal_bg();
-    sidebar.classList.add("toggle-sidebar");
-  }
+function toggle_component(component) {
+  create_modal_bg();
+  component.classList.add('toggle');
 }
 
-function close_sidebar() {
+function close_component(component) {
   remove_modal_bg();
-  sidebar.classList.remove("toggle-sidebar");
+  component.classList.remove('toggle');
 }
 
-sidebar_toggle_btn.addEventListener("click", toggle_sidebar);
-mobile_sidebar_toggle_btn.addEventListener("click", toggle_sidebar);
-sidebar_close_btn.addEventListener("click", close_sidebar);
+sidebar_toggle_btn.onclick = () => toggle_component(sidebar);
+mobile_sidebar_toggle_btn.onclick = () => toggle_component(sidebar);
+sidebar_close_btn.onclick = () => close_component(sidebar);
 
 window.addEventListener('click', (event) => {
   if(event.target == modal_bg && 
-      sidebar.classList.contains('toggle-sidebar'))
-    close_sidebar();
+      sidebar.classList.contains('toggle'))
+    close_component(sidebar);
 });
