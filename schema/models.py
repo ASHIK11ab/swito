@@ -20,6 +20,15 @@ class Food(db.Model):
   name = db.Column(db.String(30), nullable=False)
   price = db.Column(db.Float, nullable=False)
   quantity = db.Column(db.Integer, nullable=False)
+  img_url = db.Column(db.String(70), nullable=False)
+
+  def add_tags(self, tags):
+    """ Adds a list of tags associated with the food to the database. """
+    tag_objects = []
+    for tag in tags:
+      food_tag = FoodTag(food_id=self.id, tag_name=tag)
+      tag_objects.append(food_tag)
+    db.session.add_all(tag_objects)
 
 
 class Order(db.Model):

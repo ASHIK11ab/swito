@@ -11,6 +11,7 @@ from flask import (render_template, request, session,
 #                                 add_user, valid_extension, add_food_to_db, 
 #                                 create_food_tag, food_tag_available)
 from utils.helperfuncs import *
+from utils.gdriveupload import upload_file
 from utils.decorators import (login_required, admin_login_required)
 from init import create_app
 
@@ -91,6 +92,41 @@ def admin():
 @admin_login_required
 def products():
   return render_template('products.html')
+
+
+@app.route('/admin/products/add', methods=["POST"])
+@login_required
+@admin_login_required
+def add_product():
+  if not 'image' in request.files:
+    resp = {
+      "msg": "File part missing",
+      "status": "failure"
+    }
+    return make_response(jsonify(resp), 404)
+  
+  # Get form data.
+  name = request.form['name']
+  price = request.form['price']
+  quantity = request.form['quantity']
+  tags = request.form['tags'].split(',')
+  image_file = request.files.get('image')
+
+  if file_valid(image_file):
+    upload_successfull, img_url = upload_file(image_file, category="FOODS")
+    # When upload to storage fails.
+    if not upload_successfull:
+      resp = { "msg": "Unable to upload file", "status": "failure" }
+      status_code = 404
+    else:
+      add_food_to_db(name, price, quantity, img_url, tags)
+      resp = { "msg": "Food added successfully", "status": "success" }
+      status_code = 200
+  else:
+    resp = { "msg": "File type not supported", "status": "failure" }
+    status_code = 404
+
+  return make_response(jsonify(resp), status_code)
 
 
 @app.route('/admin/products/tags')

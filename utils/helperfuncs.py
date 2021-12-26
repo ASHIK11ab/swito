@@ -80,3 +80,19 @@ def create_food_tag(tag_name):
 def get_food_tags():
   """ Returns all food tags """
   return Tags.query.all()
+
+
+def file_valid(file):
+  """ Checks whether the uploaded file format is supported. """
+  filename = file.filename
+  return filename.rsplit('.')[1] in app.config["ALLOWED_IMAGE_EXTENSIONS"]
+
+
+def add_food_to_db(name, price, quantity, img_url, tags):
+  """ Adds a new food to the database. """
+  food = Food(name=name, price=price, quantity=quantity, img_url=img_url)
+  db.session.add(food)
+  db.session.flush()
+  food.add_tags(tags)
+  # Commit when food its associated tags are added to database.
+  db.session.commit()
