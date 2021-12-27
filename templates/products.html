@@ -35,11 +35,9 @@
       <label for="tags">Food Tags:</label>
       <select name="tags" id="tags_select">
         <option hidden disabled selected value> -- Select an option -- </option>
-        <option value="trending">Trending</option>
-        <option value="deserts">Deserts</option>
-        <option value="starters">Starters</option>
-        <option value="main_course">Main Course</option>
-        <option value="budget">Budget</option>
+        {% for tag in tags %}
+          <option value="{{ tag.name }}">{{ tag.name }}</option>
+        {% endfor %}
       </select>
 
       <div id="tags-container" class="food_tags">
@@ -50,6 +48,5 @@
 {% endblock %}
 
 {% block script %}
-  <script src="{{ url_for('static', filename='js/dashbaord.js') }}"></script>
   <script src="{{ url_for('static', filename='js/admin/product.js') }}"></script>
 {% endblock %}

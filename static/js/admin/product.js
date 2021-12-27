@@ -33,6 +33,7 @@ tags_select.onchange = function() {
   // Attach event listener to remove tag when close button is clicked.
   const tag_close_btn = tag.querySelector(".close");
   tag_close_btn.onclick =  () => { tags_container.removeChild(tag) };
+  this.value = '';
 };
 
 

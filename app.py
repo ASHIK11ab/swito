@@ -91,7 +91,8 @@ def admin():
 @login_required
 @admin_login_required
 def products():
-  return render_template('products.html')
+  tags = get_food_tags()
+  return render_template('products.html', tags=tags)
 
 
 @app.route('/admin/products/add', methods=["POST"])
