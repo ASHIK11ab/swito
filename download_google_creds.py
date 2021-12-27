@@ -12,9 +12,9 @@ API_KEY = sys.argv[2]
 
 def get_creds_file_contents():
   """ Reads the lines of the credential file. """
-  with open(f"./swito-google-creds.json", "rb") as file:
-    bytes_content = file.read()
-  return bytes_content
+  with open(f"./swito-google-creds.json", "r") as file:
+    lines = file.readlines()
+  return lines
 
 
 def is_file_contents_changed(file_contents):
