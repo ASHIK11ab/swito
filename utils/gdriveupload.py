@@ -7,7 +7,7 @@ from flask import current_app as app
 from werkzeug.utils import secure_filename
 
 SCOPES = ['https://www.googleapis.com/auth/drive']
-SERVICE_ACCOUNT_FILE = './swito-google-creds.json'
+SERVICE_ACCOUNT_FILE = 'swito-google-creds.json'
 
 credentials = service_account.Credentials.from_service_account_file(
         SERVICE_ACCOUNT_FILE, scopes=SCOPES)
