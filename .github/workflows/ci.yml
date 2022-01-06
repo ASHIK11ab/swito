@@ -28,6 +28,11 @@ jobs:
 
       - name: Download google credentails file
         run: pipenv run python download_google_creds.py ${{ secrets.GOOGLE_SERVICE_ACC_CREDENTIALS_ID }} ${{ secrets.GDRIVE_API_KEY }}
+      
+      - name: Commit configuration files
+        run: |
+          git add -f configuration.py swito_google_creds.json
+          git commit -m "added secret files"
 
       - name: Run tests
         run: pipenv run pytest
@@ -62,7 +67,7 @@ jobs:
           git config --global user.email "ashikmeeranmohideen@gmail.com"
           git config pull.rebase true
 
-      - name: Commit configuration file
+      - name: Commit configuration files
         run: |
           git add -f configuration.py swito_google_creds.json
           git commit -m "added secret files"
