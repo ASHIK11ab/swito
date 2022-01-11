@@ -4,8 +4,6 @@ import sys
 
 URL = "https://www.googleapis.com/drive/v3/files"
 
-QUERY_STRING = {"alt":"media", "mimeType": "application/vnd.google-apps.script+json"}
-
 FILE_ID = sys.argv[1]
 API_KEY = sys.argv[2]
 
@@ -39,7 +37,7 @@ def save_creds_file(contents):
 def fetch_creds_file(fileId, api_key):
   """ Fetches the credential file from Google Drive. """
   file_url = f"{URL}/{fileId}?key={api_key}"
-  resp = requests.get(file_url, params=QUERY_STRING)
+  resp = requests.get(file_url)
 
   file_contents = resp.text
 
