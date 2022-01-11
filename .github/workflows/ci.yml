@@ -27,11 +27,20 @@ jobs:
         run: pipenv run python download_config.py ${{ secrets.CONFIGURATION_FILE_ID }} ${{ secrets.GDRIVE_API_KEY }}
 
       - name: Download google credentails file
-        run: pipenv run python download_google_creds.py ${{ secrets.GOOGLE_SERVICE_ACC_CREDENTIALS_ID }} ${{ secrets.GDRIVE_API_KEY }}
-      
+        run: |
+          pipenv run python download_google_creds.py ${{ secrets.GOOGLE_SERVICE_ACC_CREDENTIALS_ID }} ${{ secrets.GDRIVE_API_KEY }}
+          ls
+          cat swito-google-creds.json
+
+      - name: Setup Git config
+        run: |
+          git config --global user.name "ASHIK11ab"
+          git config --global user.email "ashikmeeranmohideen@gmail.com"
+          git config pull.rebase true
+
       - name: Commit configuration files
         run: |
-          git add -f configuration.py swito_google_creds.json
+          git add -f configuration.py swito-google-creds.json
           git commit -m "added secret files"
 
       - name: Run tests
@@ -69,7 +78,7 @@ jobs:
 
       - name: Commit configuration files
         run: |
-          git add -f configuration.py swito_google_creds.json
+          git add -f configuration.py swito-google-creds.json
           git commit -m "added secret files"
 
       - name: Heroku login credentials
