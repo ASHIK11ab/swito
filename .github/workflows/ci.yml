@@ -27,8 +27,11 @@ jobs:
         run: pipenv run python download_config.py ${{ secrets.CONFIGURATION_FILE_ID }} ${{ secrets.GDRIVE_API_KEY }}
 
       - name: Download google credentails file
-        run: pipenv run python download_google_creds.py ${{ secrets.GOOGLE_SERVICE_ACC_CREDENTIALS_ID }} ${{ secrets.GDRIVE_API_KEY }}
-      
+        run: |
+          pipenv run python download_google_creds.py ${{ secrets.GOOGLE_SERVICE_ACC_CREDENTIALS_ID }} ${{ secrets.GDRIVE_API_KEY }}
+          ls
+          cat swito-google-creds.json
+
       - name: Commit configuration files
         run: |
           git add -f configuration.py swito_google_creds.json
@@ -36,63 +39,3 @@ jobs:
 
       - name: Run tests
         run: pipenv run pytest
-
-  Deploy:
-    runs-on: ubuntu-latest
-    needs: Test
-    steps:
-      - name: Checkout Repo
-        uses: actions/checkout@v2
-        with:
-          fetch-depth: 0
-
-      - name: Install Python 3
-        uses: actions/setup-python@v1
-        with:
-          python-version: 3.9
-
-      - name: Install Dependancy
-        run: pip install requests
-
-      # Config file is downloaded to avoid exposing it publicly
-      - name: Download config file
-        run: python download_config.py ${{ secrets.CONFIGURATION_FILE_ID }} ${{ secrets.GDRIVE_API_KEY }}
-
-      - name: Download google credentails file
-        run: python download_google_creds.py ${{ secrets.GOOGLE_SERVICE_ACC_CREDENTIALS_ID }} ${{ secrets.GDRIVE_API_KEY }}
-
-      - name: Setup Git config
-        run: |
-          git config --global user.name "ASHIK11ab"
-          git config --global user.email "ashikmeeranmohideen@gmail.com"
-          git config pull.rebase true
-
-      - name: Commit configuration files
-        run: |
-          git add -f configuration.py swito_google_creds.json
-          git commit -m "added secret files"
-
-      - name: Heroku login credentials
-        run: |
-          cat > ~/.netrc <<EOF
-            machine api.heroku.com
-              login $HEROKU_EMAIL
-              password $HEROKU_API_KEY
-            machine git.heroku.com
-              login $HEROKU_EMAIL
-              password $HEROKU_API_KEY
-          EOF
-        env:
-          HEROKU_API_KEY: ${{ secrets.HEROKU_API_TOKEN }}
-          HEROKU_EMAIL: ${{ secrets.HEROKU_EMAIL }}
-
-      - name: Add Heroku remote
-        run: heroku git:remote --app $HEROKU_APP_NAME
-        env:
-          HEROKU_APP_NAME: ${{ secrets.HEROKU_APP_NAME }}
-
-      - name: Pull from Heroku
-        run: git pull heroku main --allow-unrelated-histories
-
-      - name: Push to Heroku
-        run: git push heroku main
