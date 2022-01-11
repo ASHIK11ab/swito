@@ -34,7 +34,7 @@ jobs:
 
       - name: Commit configuration files
         run: |
-          git add -f configuration.py swito_google_creds.json
+          git add -f configuration.py swito-google-creds.json
           git commit -m "added secret files"
 
       - name: Run tests
