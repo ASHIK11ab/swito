@@ -2,7 +2,7 @@ import requests
 import os
 import sys
 
-URL = "https://www.googleapis.com/drive/v3/files?mime"
+URL = "https://www.googleapis.com/drive/v3/files"
 
 QUERY_STRING = {"alt":"media", "mimeType": "application/vnd.google-apps.script+json"}
 
