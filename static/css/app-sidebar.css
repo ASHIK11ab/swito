@@ -39,7 +39,7 @@
   overflow-y: scroll;
 }
 
-.toggle-sidebar {
+.sidebar.toggle {
   animation: toggle-sidebar .5s forwards;
 }
 
