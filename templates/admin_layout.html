@@ -5,9 +5,11 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="shortcut icon" type="image/x-icon"
     href="{{ url_for('static', filename='images/favicon.png') }}">
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/icons.css') }}">
   <link rel="stylesheet" href="{{ url_for('static', filename = 'css/app-header.css') }}">
   <link rel="stylesheet" href="{{ url_for('static', filename = 'css/app-sidebar.css') }}">
   <link rel="stylesheet" href="{{ url_for('static', filename='css/app-mobile-nav.css') }}">
+
   {% block stylesheet %} {% endblock %}
   <title> {% block title %} {% endblock %}</title>
 </head>
@@ -34,15 +36,15 @@
   <nav class="mobile-navbar">
     <a href="#home">
       <i class="icon home-icon"></i>
-      <span>Home</span>
+      <span>Overview</span>
     </a>
     <a href="#products">
       <i class="icon search-icon"></i>
-      <span>Search</span>
+      <span>Manage Foods</span>
     </a>
     <a href="#products">
-      <i class="icon cart-icon"></i>
-      <span>Cart</span>
+      <i class="icon announcement-icon"></i>
+      <span>Manage Announcements</span>
     </a>
     <a href="#contact" id="mobile-sidebar-toggle-btn">
       <i class="icon ham-menu-icon"></i>
@@ -67,15 +69,15 @@
       <section class="sidebar-section">
         <div class="links">
           <a href="{{ url_for('manage_foods') }}">
-            <i class="icon ticket-icon"></i>
+            <i class="icon foods-icon"></i>
             Manage Foods
           </a>
           <a href="{{ url_for('manage_tags') }}">
-            <i class="icon ticket-icon"></i>
+            <i class="icon tags-icon"></i>
             Manage Tags
           </a>
           <a href="#">
-            <i class="icon announcement-icon"></i>
+            <i class="icon peoples-icon"></i>
             Manage Customers
           </a>
         </div>
@@ -83,11 +85,11 @@
       <section class="sidebar-section">
         <div class="links">
           <a href="#">
-            <i class="icon cart-icon"></i>
+            <i class="icon sales-stats-icon"></i>
             Sales Statistics
           </a>
           <a href="#">
-            <i class="icon order-icon"></i>
+            <i class="icon order-stats-icon"></i>
             Order Statistics
           </a>
         </div>
