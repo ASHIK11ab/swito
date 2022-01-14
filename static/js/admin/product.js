@@ -27,6 +27,14 @@ form_close_btn.addEventListener('click', () => { close_component(form) });
 
 // Dynamically create and add tags when tags are selected.
 tags_select.onchange = function() {
+  const selected_tags = parse_selected_tags();
+
+  // Do nothing if the tag is aldreadly selected.
+  if(selected_tags.includes(this.value)) {
+    this.value = '';
+    return false;
+  }
+
   const tag = create_food_tag(this.value);
   tags_container.appendChild(tag);
 
@@ -53,9 +61,13 @@ form.onsubmit = () => {
   xhr.open("POST", "/admin/foods/add", true);
   xhr.onreadystatechange = function() {
     if(this.readyState == 4) {
+      if(this.status == 200) {
+        // Once food is added clear all input field and selected tags.
+        form.querySelectorAll('input').forEach((field) => field.value = '');
+        tags_container.querySelectorAll('.tag').forEach((tag) => tag.remove());
+      }
       const resp = JSON.parse(this.responseText);
       alert(resp.msg);
-      close_component(form);
     }
   }
 

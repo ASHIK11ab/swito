@@ -34,13 +34,11 @@ add_tag_form.onsubmit = () => {
         // Appending the new tag to aldready displayed tags.
         const new_tag = create_tag(tag);
         document.querySelector(".food_tags").appendChild(new_tag);
-        alert('Tag added successfully')
-        close_component(add_tag_form);
+        // clear input field when tag is added successfully.
+        document.querySelector('#tag-name').value = '';
       }
-      else {
-        let resp = JSON.parse(this.responseText);
-        alert(resp.msg);
-      }
+      let resp = JSON.parse(this.responseText);
+      alert(resp.msg);
     }
   };
 
