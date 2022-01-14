@@ -50,7 +50,7 @@ function parse_selected_tags() {
 form.onsubmit = () => {
   const food_tags = parse_selected_tags();
   let xhr = new XMLHttpRequest();
-  xhr.open("POST", "/admin/products/add", true);
+  xhr.open("POST", "/admin/foods/add", true);
   xhr.onreadystatechange = function() {
     if(this.readyState == 4) {
       const resp = JSON.parse(this.responseText);

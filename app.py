@@ -88,18 +88,18 @@ def admin():
   return render_template('admin_dashboard.html')
 
 
-@app.route('/admin/products')
+@app.route('/admin/foods')
 @login_required
 @admin_login_required
-def products():
+def manage_foods():
   tags = get_food_tags()
   return render_template('products.html', tags=tags)
 
 
-@app.route('/admin/products/add', methods=["POST"])
+@app.route('/admin/foods/add', methods=["POST"])
 @login_required
 @admin_login_required
-def add_product():
+def add_food():
   if not 'image' in request.files:
     resp = {
       "msg": "File part missing",
@@ -131,15 +131,15 @@ def add_product():
   return make_response(jsonify(resp), status_code)
 
 
-@app.route('/admin/products/tags')
+@app.route('/admin/foods/tags')
 @login_required
 @admin_login_required
-def tags():
+def manage_tags():
   tags = get_food_tags()
   return render_template('food-tags.html', tags=tags, tags_cnt=len(tags))
 
 
-@app.route('/admin/products/tags/add', methods=["POST"])
+@app.route('/admin/foods/tags/add', methods=["POST"])
 @login_required
 @admin_login_required
 def add_tag():

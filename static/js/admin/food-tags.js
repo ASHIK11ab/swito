@@ -17,7 +17,7 @@ function create_tag(tag_text) {
 add_tag_form.onsubmit = () => {
   const tag = document.querySelector('#tag-name').value;
   const xhr = new XMLHttpRequest();
-  xhr.open("POST", "/admin/products/tags/add", true);
+  xhr.open("POST", "/admin/foods/tags/add", true);
 
   xhr.onreadystatechange = function() {
     if(this.readyState == 4) {
