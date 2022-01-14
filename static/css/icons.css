@@ -1,0 +1,52 @@
+/* Icons */
+.cart-icon {
+  background: url('/static/icons/cart.svg');
+}
+
+.order-icon {
+  background: url('/static/icons/order-box.svg');
+}
+
+.ticket-icon {
+  background: url('/static/icons/ticket.svg');
+}
+
+.announcement-icon {
+  background: url('/static/icons/speaker.svg');
+}
+
+.account-icon {
+  background: url('/static/icons/account.svg');
+}
+
+.tags-icon {
+  background: url('/static/icons/tags.svg');
+}
+
+.peoples-icon {
+  background: url('/static/icons/peoples.svg');
+}
+
+.sales-stats-icon {
+  background: url('/static/icons/sales-stats.svg');
+}
+
+.order-stats-icon {
+  background: url('/static/icons/order-stats.svg');
+}
+
+.foods-icon {
+  background: url('/static/icons/foods.svg');
+}
+
+.logout-icon {
+  background: url('/static/icons/sign-out.svg');
+}
+
+.home-icon {
+  background: url('/static/icons/home.svg');
+}
+
+.search-icon {
+  background: url('/static/icons/search.svg');
+}
