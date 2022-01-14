@@ -96,3 +96,15 @@ def add_food_to_db(name, price, quantity, img_url, tags):
   food.add_tags(tags)
   # Commit when food its associated tags are added to database.
   db.session.commit()
+
+
+def get_dashboard_foods():
+  foods = {}
+  tags_to_search_for = ["Trending", "Budget", "Best Sellers"]
+  for tag in tags_to_search_for:
+    res = db.session.query(Food, FoodTag)\
+      .with_entities(Food.id, Food.name, Food.price, 
+                      Food.quantity, Food.img_url, FoodTag.tag_name)\
+      .filter(Food.id == FoodTag.food_id, FoodTag.tag_name == tag).all()
+    foods[tag] = res
+  return (foods, tags_to_search_for)

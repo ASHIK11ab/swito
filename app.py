@@ -77,7 +77,8 @@ def logout():
 @app.route('/dashboard', methods=["GET", "POST"])
 @login_required
 def dashboard():
-  return render_template('dashboard.html')
+  foods, tags = get_dashboard_foods()
+  return render_template('dashboard.html', foods=foods, tags=tags)
 
 
 @app.route('/admin')
