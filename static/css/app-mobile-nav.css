@@ -1,11 +1,3 @@
-.home-icon {
-  background: url('/static/icons/home.svg');
-}
-
-.search-icon {
-  background: url('/static/icons/search.svg');
-}
-
 .mobile-navbar {
   position: fixed;
   bottom: 0;

@@ -3,30 +3,6 @@
   --sidebar-link-bg-hover-color: #e9e7e7;
 }
 
-.cart-icon {
-  background: url('/static/icons/cart.svg');
-}
-
-.order-icon {
-  background: url('/static/icons/order-box.svg');
-}
-
-.ticket-icon {
-  background: url('/static/icons/ticket.svg');
-}
-
-.announcement-icon {
-  background: url('/static/icons/speaker.svg');
-}
-
-.account-icon {
-  background: url('/static/icons/account.svg');
-}
-
-.logout-icon {
-  background: url('/static/icons/sign-out.svg');
-}
-
 .sidebar {
   position: fixed;
   top: 0;
