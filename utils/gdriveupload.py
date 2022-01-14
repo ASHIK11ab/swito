@@ -30,5 +30,5 @@ def upload_file(file, category):
                                       ).execute()
   if 'id' not in resp.keys():
     return (False, None)
-  image_url = f"https://drive.google.com/file/d/{resp['id']}"
+  image_url = f"https://drive.google.com/uc?export=view&id={resp['id']}"
   return (True, image_url)
