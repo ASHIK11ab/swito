@@ -2,16 +2,6 @@
 
 {% block title %} Dashboard | Swito {% endblock %}
 
-{% block msg %}
-  {% with messages = get_flashed_messages() %}
-    {% if messages %}
-      {% for msg in messages %}
-        <p class="success">{{ msg }}</p>
-      {% endfor %}
-    {% endif %}
-  {% endwith %}
-{% endblock %}
-
 {% block body %}
   <div class="container">
     {% for tag in tags %}
@@ -19,7 +9,7 @@
         <h2 class="section-title">{{ tag }}</h2>
         <div class="foods">
           {% for food in foods[tag] %}
-          <div class="food-card">
+          <div class="food-card" data-food-id="{{ food.id }}">
             <div class="food-image">
               <img src="{{ food.img_url }}" 
                 alt="{{ food.name }} image">

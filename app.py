@@ -5,7 +5,7 @@
   The central application.
 """
 
-from flask import (render_template, request, session,
+from flask import (render_template, request, session, render_template_string,
                     url_for, redirect, flash, make_response, jsonify)
 # from utils.helperfuncs import ( login_valid, username_exists, upload_file,
 #                                 add_user, valid_extension, add_food_to_db, 
@@ -92,7 +92,7 @@ def admin():
 @login_required
 @admin_login_required
 def manage_foods():
-  tags = get_food_tags()
+  tags = get_tags()
   return render_template('products.html', tags=tags)
 
 
@@ -135,7 +135,7 @@ def add_food():
 @login_required
 @admin_login_required
 def manage_tags():
-  tags = get_food_tags()
+  tags = get_tags()
   return render_template('food-tags.html', tags=tags, tags_cnt=len(tags))
 
 

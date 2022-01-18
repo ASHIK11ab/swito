@@ -71,13 +71,13 @@ def food_tag_available(tag_name):
 
 
 def create_food_tag(tag_name):
-  """ Adds a created food tag to database """
+  """ Adds a food tag to database """
   tag = Tags(name=tag_name)
   db.session.add(tag)
   db.session.commit()
 
 
-def get_food_tags():
+def get_tags():
   """ Returns all food tags """
   return Tags.query.all()
 
@@ -99,8 +99,16 @@ def add_food_to_db(name, price, quantity, img_url, tags):
 
 
 def get_dashboard_foods():
+  """ 
+    Returns the list of foods which are to be displayed in user's dashboard.
+    :return: A tuple containing foods and tags.
+    :rtype: tuple  
+  """
+
   foods = {}
   tags_to_search_for = ["Trending", "Budget", "Best Sellers"]
+
+  # Select the foods which belongs to the above chosen tags.
   for tag in tags_to_search_for:
     res = db.session.query(Food, FoodTag)\
       .with_entities(Food.id, Food.name, Food.price, 
@@ -108,3 +116,33 @@ def get_dashboard_foods():
       .filter(Food.id == FoodTag.food_id, FoodTag.tag_name == tag).all()
     foods[tag] = res
   return (foods, tags_to_search_for)
+
+
+def get_food_tags(food_id):
+  """ 
+    Returns the list of tags associated with a food. 
+
+    :param food_id: Id of the food whose tags is to be retrieved.
+    :return: A list of tags associated with the food.
+    :rtype: list
+  """
+
+  food_tags = FoodTag.query.with_entities(FoodTag.tag_name)\
+    .filter(FoodTag.food_id == food_id).all()
+  
+  tags = [tag.tag_name for tag in food_tags]
+  return tags
+
+
+def get_food_info(food_id):
+  """ 
+    Returns a food's info along with its associated tags.
+
+    :param food_id: Id of the food whose info is to be retrieved
+    :return: A tuple containing the food's info and its associated tags
+    :rtype: tuple
+  """
+
+  food = Food.query.get(food_id)
+  tags = get_food_tags(food_id)
+  return (food, tags)

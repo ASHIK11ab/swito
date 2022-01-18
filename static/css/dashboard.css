@@ -1,3 +1,17 @@
+/* This stylesheet contains styles related to 
+  the user dashboard page of the application. */
+/* ----------------------------------
+      Table of Contents
+   ----------------------------------
+     1. General styles
+     2. Foods section
+     3. Food card and its components
+*/
+
+
+/* --------------------
+    1. General styles
+   -------------------- */
 :root {
   --food-tag-bg-color: #FFDBF2;
 }
@@ -8,16 +22,27 @@
   font-family: 'Segoe UI', Arial, sans-serif;
 }
 
+
+/* -------------------
+    2. Foods section
+   ------------------- */
+/* Section which contains the title and foods. */
 .foods-section {
   margin-top: 2rem;
 }
 
+/* Foods which contains all the food cards is displayed using
+  responsive grid layout. */
 .foods-section .foods {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(300px, auto));
   grid-gap: 20px 30px;
 }
 
+
+/* -----------------------------------
+    3. Food card and its components
+   ----------------------------------- */
 .food-card {
   position: relative;
   width: 100%;
@@ -26,6 +51,7 @@
   box-shadow: 0px 1px 5px 0px rgb(222 222 222);  
   -webkit-box-shadow: 0px 1px 5px 0px rgb(222 222 222);
   -moz-box-shadow: 0px 1px 5px 0px rgb(222 222 222);
+  cursor: pointer;
 }
 
 .food-image {
@@ -57,7 +83,7 @@
   font-weight: 500;
 }
 
-.card-body .food-tag {
+.food-tag {
   background-color: var(--food-tag-bg-color);
   color: var(--brand-color);
   width: auto;
