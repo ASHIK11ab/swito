@@ -8,6 +8,7 @@
   <link rel="stylesheet" href="{{ url_for('static', filename = 'css/app-sidebar.css') }}">
   <link rel="stylesheet" href="{{ url_for('static', filename='css/app-mobile-nav.css') }}">
   <link rel="stylesheet" href="{{ url_for('static', filename='css/dashboard.css') }}">
+  {% block stylesheet %} {% endblock %}
   <title> {% block title %} {% endblock %}</title>
 </head>
 <body>
