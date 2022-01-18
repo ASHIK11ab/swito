@@ -52,7 +52,7 @@ def add_user(username, password):
 
 
 def valid_extension(filename):
-  return filename.lower().rsplit('.')[1] in app.config['FOOD_IMAGE_EXTENSIONS']
+  return filename.lower().rsplit('.')[1] in app.config['ALLOWED_IMAGE_EXTENSIONS']
 
 
 def food_tag_available(tag_name):
@@ -80,12 +80,6 @@ def create_food_tag(tag_name):
 def get_tags():
   """ Returns all food tags """
   return Tags.query.all()
-
-
-def file_valid(file):
-  """ Checks whether the uploaded file format is supported. """
-  filename = file.filename
-  return filename.rsplit('.')[1] in app.config["ALLOWED_IMAGE_EXTENSIONS"]
 
 
 def add_food_to_db(name, price, quantity, img_url, tags):

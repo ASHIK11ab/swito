@@ -134,7 +134,7 @@ def add_food():
   tags = request.form['tags'].split(',')
   image_file = request.files.get('image')
 
-  if file_valid(image_file):
+  if valid_extension(image_file.filename):
     upload_successfull, img_url = upload_file(image_file, category="FOODS")
     # When upload to storage fails.
     if not upload_successfull:
