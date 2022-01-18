@@ -146,3 +146,47 @@ def get_food_info(food_id):
   food = Food.query.get(food_id)
   tags = get_food_tags(food_id)
   return (food, tags)
+
+
+def get_similar_foods(food_id):
+  """ 
+    Returns the foods which are similar to a given food.
+
+    :param food_id: Id of the food for which similar foods are to be found
+    :return: list of foods which are similar to the given food
+    :rtype: list
+  """
+
+  # List of tags which the selected food contains which is used
+  # for finding similar foods of a given food.
+  tags = get_food_tags(food_id)
+
+  # Get details of tags associated with each food.
+  result = FoodTag.query.with_entities(FoodTag.food_id, FoodTag.tag_name).all()
+
+  # A food is qualified if it contains atleast one tag which is 
+  # part of the list of tags of the selected food. Avoid the food
+  # selected by the user and choosing same foods again.
+  qualified_food_ids = []
+  for foodId, tagname in result:
+    if tagname in tags and foodId != food_id and foodId not in qualified_food_ids:
+      qualified_food_ids.append(foodId)
+  
+  # Get details of the foods whose id is part of the `qualified_food_ids`.
+  similar_foods = []
+  for foodId in qualified_food_ids:
+    res = db.session.query(Food, FoodTag)\
+            .with_entities(Food.id, Food.name, Food.price,
+                            Food.img_url, FoodTag.tag_name)\
+            .filter(Food.id == FoodTag.food_id, Food.id == foodId).first()
+
+    food = {
+      'id': res.id,
+      'name': res.name,
+      'price': res.price,
+      'img_url': res.img_url,
+      'tag': res.tag_name
+    }
+    similar_foods.append(food)
+  
+  return similar_foods

@@ -81,6 +81,26 @@ def dashboard():
   return render_template('dashboard.html', foods=foods, tags=tags)
 
 
+@app.route('/dashboard/foods/<int:food_id>')
+@login_required
+def get_food_details(food_id):
+  if request.args.get('request-type') == 'similar-foods':
+    similar_foods = get_similar_foods(food_id)
+    return make_response(jsonify(similar_foods), 200) 
+  else:
+    food, tags = get_food_info(food_id)
+    if food is None:
+      return render_template_string(
+        """
+          <h1>Invalid URL</h1>
+          <h2>Redirecting to Dashboard</h2>
+          <script>
+            setTimeout(() => window.location = `${window.origin}/dashboard`, 3000);
+          </script>
+        """)
+    return render_template('food.html', food=food, tags=tags)
+
+
 @app.route('/admin')
 @login_required
 @admin_login_required
