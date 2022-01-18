@@ -1,0 +1,44 @@
+{% extends "dashboard.html" %}
+
+{% block title %} {{ food.name }} - Swito {% endblock %}
+
+{% block stylesheet %}
+  <link rel="stylesheet" 
+    href="{{ url_for('static', filename='css/food.css') }}">
+{% endblock %}
+
+{% block body %}
+  <div class="container main-container">
+    <section class="food">
+      <div class="food-image">
+        <img src="{{ food.img_url }}" alt="{{ food.name }} image - Swito">
+      </div>
+      <div class="food-desc">
+        <span class="food-name">{{ food.name }}</span>
+        <div class="food-tags">
+          {% for tag in tags %}
+            <span class="food-tag">{{ tag }}</span>
+          {% endfor %}
+        </div>
+          {% if food.quantity > 0 %}
+            <span class="food-status">Available - In Stock</span>
+          {% else %}
+            <span class="food-status danger">Out Of Stock</span>
+          {% endif %}
+        <span class="food-price">₹ {{ food.price }}</span>
+        <div class="quantity-box">
+          <span>Quantity:</span>
+          <input type="number" id="quantity-cnt" minvalue="1">
+        </div>
+        <div class="buttons">
+          <button id="buy-now-btn">Buy Now</button>
+          <button id="add-to-cart-btn">Add to cart</button>
+        </div>
+      </div>
+    </section>
+  </div>
+{% endblock %}
+
+{% block script %}
+  <script src="{{ url_for('static', filename='js/food.js') }}"></script>
+{% endblock %}
