@@ -55,19 +55,19 @@ def valid_extension(filename):
   return filename.lower().rsplit('.')[1] in app.config['ALLOWED_IMAGE_EXTENSIONS']
 
 
-def food_tag_available(tag_name):
+def food_tag_exists(tag_name):
   """
-    Checks whether a food tag is available or aldready exists 
+    Checks whether a food tag aldready exists .
     :param tag_name: name of the tag to be checked
-    :return: boolean indicating whether tag is available or not
+    :return: boolean indicating whether tag exists or not
     :rtype: boolean
   """
   tags = Tags.query.all()
   for tag in tags:
     # Return False if tag name aldready exists.
     if tag.name == tag_name:
-      return False
-  return True
+      return True
+  return False
 
 
 def create_food_tag(tag_name):

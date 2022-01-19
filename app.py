@@ -7,9 +7,6 @@
 
 from flask import (render_template, request, session, render_template_string,
                     url_for, redirect, flash, make_response, jsonify)
-# from utils.helperfuncs import ( login_valid, username_exists, upload_file,
-#                                 add_user, valid_extension, add_food_to_db, 
-#                                 create_food_tag, food_tag_available)
 from utils.helperfuncs import *
 from utils.gdriveupload import upload_file
 from utils.decorators import (login_required, admin_login_required)
@@ -165,15 +162,15 @@ def manage_tags():
 def add_tag():
   tag = request.form.get('name')
   # Add tag to database if not aldready exists.
-  if food_tag_available(tag):
+  if food_tag_exists(tag):
+    msg = "Tag name not available"
+    status = "failure"
+    status_code = 404
+  else:
     create_food_tag(tag)
     msg = "Tag created successfully"
     status = "success"
     status_code = 200
-  else:
-    msg = "Tag name not available"
-    status = "failure"
-    status_code = 404
   return make_response(jsonify({"msg": msg, "status": status}), status_code)
 
 
