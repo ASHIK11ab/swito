@@ -17,19 +17,6 @@ def get_config_file_contents():
   return lines
 
 
-def is_file_contents_changed(file_contents):
-  """ Checks whether the fetched configuration file and the 
-    available configuration files are different. """
-  contents = get_config_file_contents()
-
-  if len(file_contents) != len(contents):
-    return True
-  for index in range(len(file_contents)):
-    if file_contents[index] != contents[index]:
-      return True
-  return False
-
-
 def save_config_file(contents):
   """ Saves the configuration file to the file system. """
   with open(f"./configuration.py", "w") as file:
@@ -43,9 +30,7 @@ def fetch_config_file(fileId, api_key):
 
   file_contents = resp.text
 
-  if not os.path.exists(f"./configuration.py") \
-      or is_file_contents_changed(file_contents):
-    save_config_file(file_contents)
+  save_config_file(file_contents)
 
 def main():
   fetch_config_file(FILE_ID, API_KEY)

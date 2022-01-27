@@ -17,19 +17,6 @@ def get_creds_file_contents():
   return lines
 
 
-def is_file_contents_changed(file_contents):
-  """ Checks whether the fetched configuration file and the 
-    available configuration files are different. """
-  contents = get_creds_file_contents()
-
-  if len(file_contents) != len(contents):
-    return True
-  for index in range(len(file_contents)):
-    if file_contents[index] != contents[index]:
-      return True
-  return False
-
-
 def save_creds_file(contents):
   """ Saves the credential file to the file system. """
   with open(f"./swito-google-creds.json", "w") as file:
@@ -43,9 +30,7 @@ def fetch_creds_file(fileId, api_key):
 
   file_contents = resp.text
 
-  if not os.path.exists(f"./swito-google-creds.json") \
-      or is_file_contents_changed(file_contents):
-    save_creds_file(file_contents)
+  save_creds_file(file_contents)
 
 def main():
   fetch_creds_file(FILE_ID, API_KEY)
