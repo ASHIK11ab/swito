@@ -6,10 +6,31 @@
   the application.
 """
 
+from datetime import datetime
 from werkzeug.security import check_password_hash
 from schema.models import *
 from flask import current_app as app
 import requests
+
+def get_current_date():
+  """ Returns the current date in `dd/mm/yyyy` format. """
+  date = datetime.now()
+  current_date = f"{date.day}/{date.month}/{date.year}"
+  return current_date
+
+
+def get_current_time():
+  """ Returns the current time in 12 hrs `hh:mm` format. """
+  date = datetime.now()
+  # Set `AM` and `PM` accordingly.
+  if date.hour > 12:
+    hour = date.hour - 12
+    time = f"{hour}:{date.minute} PM"
+  else:
+    hour = date.hour
+    time = f"{hour}:{date.minute} AM"
+  return time
+
 
 def login_valid(username, password):
   """ Validates the credentials of the user.
@@ -41,14 +62,26 @@ def username_exists(username):
 
 
 def add_user(username, password):
-  """ Adds a new user to the database.
+  """
+    Adds a new user to the database.
 
-  :param username: username of the user
-  :param password: password of the user
+    :param username: username of the user
+    :param password: password of the user
   """
   user = User(username=username, password=password)
   db.session.add(user)
   db.session.commit()
+
+
+def get_user(username):
+  """
+    Returns a users details
+
+    :param username: username of the user
+    :return: information of the user
+    :rtype: User object
+  """
+  return User.query.filter(User.username == username).first()
 
 
 def valid_extension(filename):
