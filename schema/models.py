@@ -13,6 +13,27 @@ class User(db.Model):
     self.username = username
     self.password = generate_password_hash(password)
 
+  def add_item_to_cart(self, food_id, quantity):
+    cart_item = Cart(user_id=self.id, food_id=food_id, quantity=quantity)
+    db.session.add(cart_item)
+    db.session.commit()
+
+  def place_order(self, food, quantity, date, time):
+
+    total_amount = food.price * quantity
+
+    order = Order(date=date, time=time, total_amount=total_amount)
+    db.session.add(order)
+    db.session.flush()
+
+    order_item = OrderItem(order_id=order.id, food_name=food.name,
+                            price=food.price, quantity=quantity)
+    
+    user_order = UserOrder(user_id=self.id, order_id=order.id)
+
+    db.session.add_all([order_item, user_order])
+    db.session.commit()
+
 
 class Food(db.Model):
   __tablename__ = "foods"
