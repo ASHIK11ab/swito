@@ -9,7 +9,7 @@
 
 {% block body %}
   <div class="container main-container">
-    <section class="food">
+    <section class="food" data-food-id="{{ food.id }}">
       <div class="food-image">
         <img src="{{ food.img_url }}" alt="{{ food.name }} image - Swito">
       </div>
@@ -28,7 +28,7 @@
         <span class="food-price">₹ {{ food.price }}</span>
         <div class="quantity-box">
           <span>Quantity:</span>
-          <input type="number" id="quantity-cnt" minvalue="1">
+          <input type="number" id="quantity-cnt" minvalue="1" value="1">
         </div>
         <div class="buttons">
           <button id="buy-now-btn">Buy Now</button>
