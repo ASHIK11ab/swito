@@ -98,6 +98,65 @@ def get_food_details(food_id):
     return render_template('food.html', food=food, tags=tags)
 
 
+@app.route('/dashboard/cart/add', methods=["POST"])
+@login_required
+def add_food_to_cart():
+  food_id = int(request.form['food-id'])
+  quantity = int(request.form['quantity'])
+
+  food, tags = get_food_info(food_id)
+
+  if food is None:
+    return make_response(jsonify({
+      'msg': 'Invalid food id',
+      'status': 'failure'
+    }), 404)
+  
+  if quantity > food.quantity:
+    return make_response(jsonify({
+      'msg': 'Enter lesser quantity',
+      'status': 'failure'
+    }), 404)
+
+  user = get_user(session['user'])
+  user.add_item_to_cart(food_id, quantity)
+  return make_response(jsonify({
+    'msg': 'Added to cart successfully',
+    'status': 'success'
+  }), 200)
+
+
+@app.route('/dashboard/orders/new', methods=["POST"])
+@login_required
+def place_order():
+  food_id = int(request.form['food-id'])
+  quantity = int(request.form['quantity'])
+
+  food, tags = get_food_info(food_id)
+
+  if food is None:
+    return make_response(jsonify({
+      'msg': 'Invalid food id',
+      'status': 'failure'
+    }), 404)
+  
+  if quantity > food.quantity:
+    return make_response(jsonify({
+      'msg': 'Enter lesser quantity',
+      'status': 'failure'
+    }), 404)
+
+  user = get_user(session['user'])
+  date = get_current_date()
+  time = get_current_time()
+
+  user.place_order(food, quantity, date=date, time=time)
+  return make_response(jsonify({
+    'msg': 'Order placed successfully',
+    'status': 'success'
+  }), 200)
+
+
 @app.route('/admin')
 @login_required
 @admin_login_required
