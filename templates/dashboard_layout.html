@@ -22,8 +22,9 @@
         </div>
       </div>
   
-      <form action="{{ url_for('dashboard') }}">
-        <input type="text" name="query" placeholder="Search for your favourite foods">
+      <form action="{{ url_for('dashboard') }}" id="search-form">
+        <input type="text" name="query" id="query"
+          placeholder="Search for your favourite foods">
       </form>
   
       <div class="right-nav">
@@ -100,7 +101,7 @@
             <i class="icon account-icon"></i>
             My Account
           </a>
-          <a href="#">
+          <a href="{{ url_for('logout') }}">
             <i class="icon logout-icon"></i>
             Sign Out
           </a>

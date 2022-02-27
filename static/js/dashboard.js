@@ -2,7 +2,7 @@ const sidebar = document.getElementById("app-sidebar");
 const sidebar_toggle_btn = document.getElementById("sidebar-toggle-btn");
 const mobile_sidebar_toggle_btn = document.getElementById("mobile-sidebar-toggle-btn");
 const sidebar_close_btn = document.getElementById("sidebar-close-btn");
-const search_form = document.getElementById("search-form")
+const search_form = document.getElementById("search-form");
 let modal_bg = undefined;
 
 
