@@ -217,3 +217,32 @@ def get_similar_foods(food_id):
     similar_foods.append(food)
   
   return similar_foods
+
+
+def can_add_item_to_cart(food_id, quantity, username):
+  """ 
+    Performs the necessary checks before adding an item to cart.
+
+    :param food_id: Id of the food to be added to cart
+    :param quantity: Quantity of the food to be added
+    :param username: Username of the user
+    :return: A tuple of status and the response message
+    :rtype: tuple  
+  """
+  food, tags = get_food_info(food_id)
+  
+  if food is None:
+    return (False, 'Invalid food id')
+  
+  if quantity > food.quantity:
+    return (False, 'Enter lesser quantity')
+
+  # Check if the selected food is aldreadly in cart or not.
+  cart_food = db.session.query(User, Cart).filter(
+                User.id == Cart.user_id, User.username == username, 
+                Cart.food_id == food.id).first()
+
+  if not cart_food is None:
+    return (False, 'Item aldready in cart')
+  
+  return (True, 'Added to cart successfully')

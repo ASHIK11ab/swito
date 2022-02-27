@@ -104,24 +104,15 @@ def add_food_to_cart():
   food_id = int(request.form['food-id'])
   quantity = int(request.form['quantity'])
 
-  food, tags = get_food_info(food_id)
+  (status, msg) = can_add_item_to_cart(food_id, quantity, session['user'])
 
-  if food is None:
-    return make_response(jsonify({
-      'msg': 'Invalid food id',
-      'status': 'failure'
-    }), 404)
-  
-  if quantity > food.quantity:
-    return make_response(jsonify({
-      'msg': 'Enter lesser quantity',
-      'status': 'failure'
-    }), 404)
+  if not status:
+    return make_response(jsonify({'msg': msg, 'status': 'failure'}), 404)
 
   user = get_user(session['user'])
   user.add_item_to_cart(food_id, quantity)
   return make_response(jsonify({
-    'msg': 'Added to cart successfully',
+    'msg': msg,
     'status': 'success'
   }), 200)
 
