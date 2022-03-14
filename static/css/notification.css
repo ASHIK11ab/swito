@@ -1,0 +1,147 @@
+/* This stylesheet contains the styles for the notificaiton component. */
+
+/* -------------------------------------
+            Table of Contents
+   -------------------------------------
+     1. Notification and its components
+     2. Notification theme
+     3. Animations
+*/
+
+
+/* --------------------------------------
+      1. Notification and its components
+   -------------------------------------- */
+
+.notification {
+  position: fixed;
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  width: 300px;
+  border-radius: 12px;
+  top: -400px;
+  left: 50%;
+  transform: translateX(-50%);
+  box-shadow: 0.2px 0px 3px 0px #c0c0c0;
+}
+
+/* Animate the notificaiton when toggled. Dynamically added
+  by javascript. */
+.notification.toggle {
+  animation: toggle-notification 5s forwards ease-in-out;
+}
+
+.notification .icon {
+  width: 24px;
+  height: 24px;
+  background-repeat: no-repeat;
+}
+
+/* Style the notification text and format the overflow with ellipsis. */
+.notification-text {
+  position: relative;
+  width: 70%;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  padding: 25px 15px 25px 0;
+  margin-left: -20px;
+  font-size: 18px;
+  font-family: 'Segoe UI', Arial, sans-serif;
+  font-weight: 600;
+  color: #5D5C5C;
+}
+
+.notification #close-notification-btn {
+  display: block;
+  position: absolute;
+  top: 8px;
+  right: 15px;
+  font-size: 25px;
+  font-weight: 800;
+  cursor: pointer;
+  color: #4e4e4e;
+}
+
+.notification #close-notification-btn:hover {
+  color: #161616;
+  transition: color .5s;
+}
+
+.notification .border {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 8px;
+  height: 100%;
+}
+
+
+/* -------------------------
+      2. Notification theme
+   ------------------------- */
+
+/* Success notificaiton theme. */
+.notification.success {
+  background-color: #f1fff4;
+}
+
+.notification.success.border {
+  border-left: 4px solid #00ef30;
+}
+
+.notification.success .icon {
+  filter: invert(55%) sepia(50%) saturate(2407%)
+            hue-rotate(90deg) brightness(113%) contrast(105%);
+}
+
+/* Failure notificaiton theme. */
+.notification.failure {
+  background-color: #fff0f0;
+}
+
+.notification.failure.border {
+  border-left: 4px solid #ea0000;
+}
+
+.notification.failure .icon {
+  filter: invert(18%) sepia(97%) saturate(5775%)
+          hue-rotate(357deg) brightness(85%) contrast(120%);
+}
+
+/* Warning notificaiton theme. */
+.notification.warning {
+  background-color: #fffdf1;
+}
+
+.notification.warning.border {
+  border-left: 4px solid #f6e33a;
+}
+
+.notification.warning .icon {
+  filter: invert(82%) sepia(99%) saturate(420%)
+          hue-rotate(338deg) brightness(102%) contrast(93%);
+}
+
+
+/* -----------------
+      3. Animaitons
+   ----------------- */
+
+/* Animates the notification. */
+@keyframes toggle-notification {
+  0% {top: -400px}
+  
+  20% {
+    top: 40px;
+  }
+
+  95% {
+    top: 40px;
+  }
+
+  100% {
+    top: -400px;
+  }
+}
