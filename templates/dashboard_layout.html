@@ -4,6 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="stylesheet" href="{{ url_for('static', filename='css/icons.css') }}">
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/notification.css') }}">
   <link rel="stylesheet" href="{{ url_for('static', filename = 'css/app-header.css') }}">
   <link rel="stylesheet" href="{{ url_for('static', filename = 'css/app-sidebar.css') }}">
   <link rel="stylesheet" href="{{ url_for('static', filename='css/app-mobile-nav.css') }}">
@@ -112,6 +113,7 @@
 
   {% block body %} {% endblock %}
 
+  <script src="{{ url_for('static', filename='js/components.js') }}"></script>
   <script src="{{ url_for('static', filename='js/dashboard.js') }}"></script>
 
   {% block script %} {% endblock %}
