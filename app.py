@@ -98,6 +98,26 @@ def get_food_details(food_id):
     return render_template('food.html', food=food, tags=tags)
 
 
+@app.route('/dashboard/cart')
+@login_required
+def user_cart():
+  items = db.session.query(Food, Cart, User)\
+          .with_entities(Food.id, Food.name, Food.price, Cart.quantity)\
+          .filter(
+            Food.id == Cart.food_id, User.id == Cart.user_id,
+            User.username == 'user1'
+          ).all()
+
+  results = []
+  for row in items:
+    result = {}
+    for column in row.keys():
+      result[column] = row[column]
+    results.append(result)
+
+  return make_response(jsonify(results), 200)
+
+
 @app.route('/dashboard/cart/add', methods=["POST"])
 @login_required
 def add_food_to_cart():
@@ -128,6 +148,12 @@ def place_order():
   if food is None:
     return make_response(jsonify({
       'msg': 'Invalid food id',
+      'status': 'failure'
+    }), 404)
+
+  if food.quantity == 0:
+    return make_response(jsonify({
+      'msg': 'Food out of stock',
       'status': 'failure'
     }), 404)
   
