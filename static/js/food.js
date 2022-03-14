@@ -3,6 +3,7 @@ const add_to_cart_btn = document.querySelector('#add-to-cart-btn');
 const food_id = document.querySelector('section.food').dataset.foodId;
 const food_quantity = document.querySelector('#quantity-cnt');
 
+// Send a POST request to server using AJAX.
 buy_now_btn.onclick = function() {
   quantity = Number.parseInt(food_quantity.value);
   if(quantity < 1) {
@@ -15,9 +16,9 @@ buy_now_btn.onclick = function() {
 
   xhr.onreadystatechange = function() {
     if(this.readyState == 4) {
-      console.log(this.responseText);
       const resp = JSON.parse(this.responseText);
-      alert(resp.msg);
+      const notification = create_notification(resp.msg, resp.status);
+      toggle_notification(notification);
     }
   }
 
@@ -42,7 +43,8 @@ add_to_cart_btn.onclick = function() {
   xhr.onreadystatechange = function() {
     if(this.readyState == 4) {
       const resp = JSON.parse(this.responseText);
-      alert(resp.msg);
+      const notification = create_notification(resp.msg, resp.status);
+      toggle_notification(notification);
     }
   }
 
@@ -63,8 +65,8 @@ window.addEventListener('DOMContentLoaded', () => {
       // Render the response to DOM.
       const resp = JSON.parse(this.responseText);
       const main_container = document.querySelector('.main-container');
-      const section = create_foods_section(resp);
-      main_container.appendChild(section);
+      const similar_foods_section = create_foods_section(resp);
+      main_container.appendChild(similar_foods_section);
       create_event_listeners_foods();
     }
   }
