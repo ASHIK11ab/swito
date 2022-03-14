@@ -50,3 +50,15 @@
 .search-icon {
   background: url('/static/icons/search.svg');
 }
+
+.tick-icon {
+  background: url('/static/icons/tick.svg');
+}
+
+.warning-icon {
+  background: url('/static/icons/warning.svg')
+}
+
+.close-btn-icon {
+  background: url('/static/icons/close-btn.svg')
+}

@@ -22,14 +22,20 @@ class User(db.Model):
 
     total_amount = food.price * quantity
 
+    # Create the order.
     order = Order(date=date, time=time, total_amount=total_amount)
     db.session.add(order)
     db.session.flush()
 
+    # Add items in the order to a separate model.
     order_item = OrderItem(order_id=order.id, food_name=food.name,
                             price=food.price, quantity=quantity)
     
+    # Associate the order with the user.
     user_order = UserOrder(user_id=self.id, order_id=order.id)
+
+    # Update the available quantity of the food.
+    food.quantity -= quantity
 
     db.session.add_all([order_item, user_order])
     db.session.commit()
